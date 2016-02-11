@@ -53,7 +53,7 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
         setupVariables();
     }
 
-    private boolean isConfigSolvable5x5(SimpleMatrix light_vector) {
+    private boolean isConfigSolvable5x5() {
 
         // 5x5 configuration is solvable if the vector of lights are orthogonal to these two
         // vectors n1 and n2 that correspond to vectors in the null space of the adjacency matrix
@@ -65,6 +65,7 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
                 { {1,0,1,0,1,1,0,1,0,1,0,0,0,0,0,1,0,1,0,1,1,0,1,0,1} });
         n2 = n2.transpose();
 
+        SimpleMatrix light_vector = calculateLightVector();
         SimpleMatrix val1 = light_vector.mult(n1);
         SimpleMatrix val2 = light_vector.mult(n2);
 
@@ -98,12 +99,10 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
     private SimpleMatrix setRow(SimpleMatrix M, SimpleMatrix row, int row_num, int col_offset) {
 
         double val;
-        //Log.i("row_before_var",String.valueOf(row));
         for (int j = col_offset; j < row.numCols(); j++ ) {
             val = row.get(0,j);
             M.set(row_num,j,val);
         }
-        //Log.i("row_after_var",String.valueOf(row));
 
         return M;
     }
@@ -116,51 +115,53 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
         int i = 0;
         int j = 0;
 
-        //double c = Double.longBitsToDouble(
-        //        Double.doubleToRawLongBits(a) ^ Double.doubleToRawLongBits(b));
-
         while ( (i < A.numRows()) && (j < A.numCols()) ) {
             SimpleMatrix C = A.extractMatrix(i,A.numRows(),j,j+1);
 
             // Find value and index of largest element in the remainder of column j.
             int k = findFirstIdx(C) + i;
-            Log.i("k_var",String.valueOf(k));
-
-            //SimpleMatrix row_i = A.extractMatrix(i,i+1,j,A.numCols());
-            //Log.i("i_var",String.valueOf(row_i));
 
             // Swap i-th and k-th rows.
             if (k >= 0) {
-                //SimpleMatrix row_i = A.extractMatrix(i,i+1,j,A.numCols());
-                //SimpleMatrix row_k = A.extractMatrix(k,k+1,j,A.numCols());
-                SimpleMatrix row_i = getRow(A,i,j);
-                SimpleMatrix row_k = getRow(A,k,j);
+                SimpleMatrix row_i = getRow(A,i,0);
+                SimpleMatrix row_k = getRow(A,k,0);
 
-                //A = setRow(A,row_i,k,j); /// Something is fucked up with the row swaps.
-                //A = setRow(A,row_k,i,j);
+                A = setRow(A,row_i,k,0);
+                A = setRow(A,row_k,i,0);
 
                 //Log.i("i_var",String.valueOf(row_i));
                 //Log.i("k_var",String.valueOf(row_k));
             }
 
             // Save the right hand side of the pivot row
-            //SimpleMatrix aijn = A.extractMatrix(i,i+1,j,A.numCols());
             SimpleMatrix aijn = getRow(A,i,j);
 
             // Column we're looking at
-            //SimpleMatrix col = A.extractMatrix(0,A.numRows(),j,j+1);
             SimpleMatrix col = getCol(A,j,0);
 
             // Never XOR the pivot row against itself
             col.set(i, 0);
 
-            //Log.i("col",String.valueOf(col));
+
             //Log.i("aijn",String.valueOf(aijn));
 
             // This builds an matrix of bits to flip
             SimpleMatrix flip = col.mult(aijn);
+            //Log.i("flip",String.valueOf(flip));
 
             // XOR the right hand side of the pivot row with all the other rows
+            //double c = Double.longBitsToDouble(
+            //        Double.doubleToRawLongBits(a) ^ Double.doubleToRawLongBits(b));
+
+            for (int n = 0; n < A.numRows(); n++) {
+                for (int m = j; m < A.numCols(); m++) {
+                    // TODO
+                    //double a = A.get(n,m);
+                    //double b = flip.get(n,m);
+                    //double c = Double.longBitsToDouble(
+                    //        Double.doubleToRawLongBits(a) ^ Double.doubleToRawLongBits(b));
+                }
+            }
 
             i++;
             j++;
