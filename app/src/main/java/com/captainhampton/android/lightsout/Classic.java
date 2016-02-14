@@ -107,7 +107,7 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
         return M;
     }
 
-    private SimpleMatrix logicalSymmetricDifference(SimpleMatrix M, SimpleMatrix flip, int col_offset) {
+    private SimpleMatrix logicalSymmetricDifference(SimpleMatrix M, SimpleMatrix flip) {
 
         SimpleMatrix P = new SimpleMatrix(new double[M.numRows()][M.numCols()]);
 
@@ -124,9 +124,7 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
     }
 
     private SimpleMatrix g2rref(SimpleMatrix A) {
-
-        // TODO : In progress - function that computes the reduced row echeleon form of a matrix
-        //        over the field GF(2).
+        // Function that computes the reduced row echeleon form of a matrix over the field GF(2).
         int i = 0;
         int j = 0;
 
@@ -144,13 +142,10 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
                 A = setRow(A,row_i,k,0,row_i.numCols());
                 A = setRow(A,row_k,i,0,row_k.numCols());
 
-                //Log.i("i_var",String.valueOf(row_i));
-                //Log.i("k_var",String.valueOf(row_k));
             }
 
             // Save the right hand side of the pivot row
             SimpleMatrix aijn = getRow(A,i,j);
-            //Log.i("aijn",String.valueOf(aijn));
 
             // Column we're looking at
             SimpleMatrix col = getCol(A,j,0);
@@ -160,30 +155,20 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
 
             // This builds an matrix of bits to flip
             SimpleMatrix flip = col.mult(aijn);
-            //Log.i("flip",String.valueOf(flip)); // looks correct
 
             // XOR the right hand side of the pivot row with all the other rows
             SimpleMatrix A_sub = A.extractMatrix(0,A.numRows(),j,A.numCols());
-            //Log.i("A_sub",String.valueOf(A_sub)); // looks correct
 
-            SimpleMatrix A_sub_xor = logicalSymmetricDifference(A_sub,flip,j);
-            //Log.i("A_sub_xor",String.valueOf(A_sub_xor));
-
-
-            // TODO: CHECK THIS PART
-            //for (int n = 0; n < A_sub_xor.numRows(); n++) {
-            //    for (int m = j; m < A_sub_xor.numCols(); m++) {
-            //        double xor_val = A_sub_xor.get(n,m);
-            //        A.set(n,m,xor_val);
-            //    }
-           // }
+            SimpleMatrix A_sub_xor = logicalSymmetricDifference(A_sub,flip);
 
             for (int n = 0; n < A.numRows(); n++) {
-                SimpleMatrix row_n = getRow(A_sub_xor,n,0);
-                A = setRow(A,row_n,n,j,A_sub_xor.numCols());
+                int col_count = 0;
+                for (int m = j; m < A.numCols(); m++) {
+                    double xor_val = A_sub_xor.get(n,col_count);
+                    A.set(n,m,xor_val);
+                    col_count++;
+                }
             }
-//            Log.i("A",String.valueOf(A));
-
             i++;
             j++;
         }
@@ -230,29 +215,19 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
         b = calculateLightVector();
         A = A.combine(0, A.numCols(), b.transpose());
         A = g2rref(A);
-        Log.i("MYTAG", String.valueOf(A));
 
-        // TODO: Display to user once calculated:
-        // Extract last column of A for solution.
         SimpleMatrix x = getCol(A,A.numCols()-1,0);
 
-
-//        SimpleMatrix x = A.solve(b.transpose());
-//
-        //Log.i("MYTAG", String.valueOf(b));
-
-//
-//        int x_size = 0;
-//        for (int i = 0; i < NUM_ROWS; i++) {
-//            for (int j = 0; j < NUM_COLS; j++) {
-//                Log.i("MYTAG", String.valueOf(x.get(x_size)));
-//                if ( x.get(x_size) == 1.0 )
-//                    solution[i][j] = Boolean.TRUE;
-//                else
-//                    solution[i][j] = Boolean.FALSE;
-//                x_size++;
-//            }
-//        }
+        int x_size = 0;
+        for (int i = 0; i < NUM_ROWS; i++) {
+            for (int j = 0; j < NUM_COLS; j++) {
+                if ( x.get(x_size) == 1.0 )
+                    solution[i][j] = Boolean.TRUE;
+                else
+                    solution[i][j] = Boolean.FALSE;
+                x_size++;
+            }
+        }
 
         return solution;
     }
@@ -284,16 +259,14 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void showSolution() {
-        calculateWinningConfig();
-//        boolean[][] solution = calculateWinningConfig();
-//
-//        for (int i = 0; i < NUM_ROWS; i++) {
-//            for (int j = 0; j < NUM_COLS; j++) {
-//                Log.i("MYTAG", String.valueOf(solution[i][j]));
-//                if (solution[i][j] == Boolean.TRUE)
-//                    lights[i][j].setTextColor(Color.YELLOW);
-//            }
-//        }
+        boolean[][] solution = calculateWinningConfig();
+
+        for (int i = 0; i < NUM_ROWS; i++) {
+            for (int j = 0; j < NUM_COLS; j++) {
+                if (solution[i][j] == Boolean.TRUE)
+                    lights[i][j].setTextColor(Color.YELLOW);
+            }
+        }
 
     }
 
