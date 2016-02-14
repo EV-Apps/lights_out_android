@@ -96,10 +96,10 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
         return col;
     }
 
-    private SimpleMatrix setRow(SimpleMatrix M, SimpleMatrix row, int row_num, int col_offset) {
+    private SimpleMatrix setRow(SimpleMatrix M, SimpleMatrix row, int row_num, int from, int to) {
 
         double val;
-        for (int j = col_offset; j < row.numCols(); j++ ) {
+        for (int j = from; j < to; j++ ) {
             val = row.get(0,j);
             M.set(row_num,j,val);
         }
@@ -107,11 +107,26 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
         return M;
     }
 
+    private SimpleMatrix logicalSymmetricDifference(SimpleMatrix M, SimpleMatrix flip, int col_offset) {
+
+        SimpleMatrix P = new SimpleMatrix(new double[M.numRows()][M.numCols()]);
+
+        for (int i = 0; i < M.numRows(); i++) {
+            for (int j = 0; j < M.numCols(); j++) {
+                double a = M.get(i,j);
+                double b = flip.get(i, j);
+                double c = Double.longBitsToDouble(
+                        Double.doubleToRawLongBits(a) ^ Double.doubleToRawLongBits(b));
+                P.set(i,j,c);
+            }
+        }
+        return P;
+    }
+
     private SimpleMatrix g2rref(SimpleMatrix A) {
 
         // TODO : In progress - function that computes the reduced row echeleon form of a matrix
         //        over the field GF(2).
-        // TODO : Investigate setRow function.
         int i = 0;
         int j = 0;
 
@@ -126,8 +141,8 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
                 SimpleMatrix row_i = getRow(A,i,0);
                 SimpleMatrix row_k = getRow(A,k,0);
 
-                A = setRow(A,row_i,k,0);
-                A = setRow(A,row_k,i,0);
+                A = setRow(A,row_i,k,0,row_i.numCols());
+                A = setRow(A,row_k,i,0,row_k.numCols());
 
                 //Log.i("i_var",String.valueOf(row_i));
                 //Log.i("k_var",String.valueOf(row_k));
@@ -135,33 +150,39 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
 
             // Save the right hand side of the pivot row
             SimpleMatrix aijn = getRow(A,i,j);
+            //Log.i("aijn",String.valueOf(aijn));
 
             // Column we're looking at
             SimpleMatrix col = getCol(A,j,0);
 
             // Never XOR the pivot row against itself
-            col.set(i, 0);
-
-
-            //Log.i("aijn",String.valueOf(aijn));
+            col.set(i,0);
 
             // This builds an matrix of bits to flip
             SimpleMatrix flip = col.mult(aijn);
-            //Log.i("flip",String.valueOf(flip));
+            //Log.i("flip",String.valueOf(flip)); // looks correct
 
             // XOR the right hand side of the pivot row with all the other rows
-            //double c = Double.longBitsToDouble(
-            //        Double.doubleToRawLongBits(a) ^ Double.doubleToRawLongBits(b));
+            SimpleMatrix A_sub = A.extractMatrix(0,A.numRows(),j,A.numCols());
+            //Log.i("A_sub",String.valueOf(A_sub)); // looks correct
+
+            SimpleMatrix A_sub_xor = logicalSymmetricDifference(A_sub,flip,j);
+            //Log.i("A_sub_xor",String.valueOf(A_sub_xor));
+
+
+            // TODO: CHECK THIS PART
+            //for (int n = 0; n < A_sub_xor.numRows(); n++) {
+            //    for (int m = j; m < A_sub_xor.numCols(); m++) {
+            //        double xor_val = A_sub_xor.get(n,m);
+            //        A.set(n,m,xor_val);
+            //    }
+           // }
 
             for (int n = 0; n < A.numRows(); n++) {
-                for (int m = j; m < A.numCols(); m++) {
-                    // TODO
-                    //double a = A.get(n,m);
-                    //double b = flip.get(n,m);
-                    //double c = Double.longBitsToDouble(
-                    //        Double.doubleToRawLongBits(a) ^ Double.doubleToRawLongBits(b));
-                }
+                SimpleMatrix row_n = getRow(A_sub_xor,n,0);
+                A = setRow(A,row_n,n,j,A_sub_xor.numCols());
             }
+//            Log.i("A",String.valueOf(A));
 
             i++;
             j++;
@@ -209,17 +230,17 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
         b = calculateLightVector();
         A = A.combine(0, A.numCols(), b.transpose());
         A = g2rref(A);
+        Log.i("MYTAG", String.valueOf(A));
 
         // TODO: Display to user once calculated:
+        // Extract last column of A for solution.
+        SimpleMatrix x = getCol(A,A.numCols()-1,0);
 
-//
-//        b = calculateLightVector();
-//
-//        Log.i("MYTAG", String.valueOf(b));
-//        Log.i("MYTAG", String.valueOf(A));
+
 //        SimpleMatrix x = A.solve(b.transpose());
 //
-//        Log.i("MYTAG", String.valueOf(x));
+        //Log.i("MYTAG", String.valueOf(b));
+
 //
 //        int x_size = 0;
 //        for (int i = 0; i < NUM_ROWS; i++) {
