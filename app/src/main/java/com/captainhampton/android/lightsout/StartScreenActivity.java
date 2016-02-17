@@ -96,7 +96,8 @@ public class StartScreenActivity extends AppCompatActivity {
         findViewById(R.id.dummy_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent("android.intent.action.CLASSIC"));
+                Intent i = new Intent(StartScreenActivity.this, Main.class);
+                startActivity(i);
             }
         });
     }
