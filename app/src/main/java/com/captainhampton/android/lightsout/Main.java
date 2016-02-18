@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener{
+public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener {
 
 
     Button bClassic, bDeluxe, bHowToPlay, bAbout;
@@ -22,39 +22,27 @@ public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
+        // setSupportActionBar(toolbar);
 
-        Fragment menu = new FragmentMenu();
+        Fragment menu = FragmentMenu.newInstance("a", "b");
+        // use the public static newInstance method instead of a constructor
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.add(R.id.menu_screen, menu, FragmentMenu.TAG).commit();
-
-        //if (bClassic.isPressed()) {
-        //    FragmentClassic fragmentClassic = new FragmentClassic();
-        //    fragmentTransaction.replace(android.R.id.content, fragmentClassic);
-       // }
-
-       // setupVariables();
     }
-
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -62,32 +50,20 @@ public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentIn
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClick(View v) {
-
-        if (bClassic.isPressed()) {
-            Intent classicIntent = new Intent("android.intent.action.CLASSIC");
-            startActivity(classicIntent);
-        }
-
-        if (bDeluxe.isPressed()) {
-            Intent deluxeIntent = new Intent("android.intent.action.DELUXE");
-            startActivity(deluxeIntent);
-        }
-
-        if (bHowToPlay.isPressed()) {
-            Intent howToPlayIntent = new Intent("android.intent.action.HOWTOPLAY");
-            startActivity(howToPlayIntent);
-        }
-
-        if (bAbout.isPressed()) {
-            Intent aboutIntent = new Intent("android.intent.action.ABOUT");
-            startActivity(aboutIntent);
-        }
+    @Override
+    public void onFragmentInteraction(int i) {
 
     }
 
     @Override
-    public void onFragmentInteraction(int i) {
+    public void onStartButtonPressed(/* if there are multiple button options from within the fragment,
+     create multiple different methods, or if the logic is simple routing, pass a parameter ex. FragmentMenu.TAG
+         implying of the location you are going to or even as simple as an int 1 (for now)*/) {
 
+//        Fragment someNewFragment = SomeOtherScreen.newInstance();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//        fragmentTransaction.replace(R.id.menu_screen, someNewFragment, FragmentMenu.TAG).commit();
     }
 }
