@@ -25,12 +25,15 @@ public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentIn
        // setSupportActionBar(toolbar);
 
         Fragment menu = new FragmentMenu();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+        fragmentTransaction.add(R.id.menu_screen, menu, FragmentMenu.TAG).commit();
 
-
-        ft.add(R.id.menu_screen, menu, FragmentMenu.TAG).commit();
+        //if (bClassic.isPressed()) {
+        //    FragmentClassic fragmentClassic = new FragmentClassic();
+        //    fragmentTransaction.replace(android.R.id.content, fragmentClassic);
+       // }
 
        // setupVariables();
     }
@@ -67,18 +70,18 @@ public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentIn
         }
 
         if (bDeluxe.isPressed()) {
-            Intent classicIntent = new Intent("android.intent.action.DELUXE");
-            startActivity(classicIntent);
+            Intent deluxeIntent = new Intent("android.intent.action.DELUXE");
+            startActivity(deluxeIntent);
         }
 
         if (bHowToPlay.isPressed()) {
-            Intent classicIntent = new Intent("android.intent.action.HOWTOPLAY");
-            startActivity(classicIntent);
+            Intent howToPlayIntent = new Intent("android.intent.action.HOWTOPLAY");
+            startActivity(howToPlayIntent);
         }
 
         if (bAbout.isPressed()) {
-            Intent classicIntent = new Intent("android.intent.action.ABOUT");
-            startActivity(classicIntent);
+            Intent aboutIntent = new Intent("android.intent.action.ABOUT");
+            startActivity(aboutIntent);
         }
 
     }

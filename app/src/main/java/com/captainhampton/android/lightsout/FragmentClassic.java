@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 
 /**
@@ -19,7 +18,7 @@ import android.widget.Button;
  * Use the {@link FragmentMenu#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentMenu extends Fragment implements OnClickListener {
+public class FragmentClassic extends Fragment implements OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,9 +33,7 @@ public class FragmentMenu extends Fragment implements OnClickListener {
 
     private OnFragmentInteractionListener mListener;
 
-    Button bClassic, bDeluxe, bHowToPlay, bAbout;
-
-    public FragmentMenu() {
+    public FragmentClassic() {
         // Required empty public constructor
     }
 
@@ -49,8 +46,8 @@ public class FragmentMenu extends Fragment implements OnClickListener {
      * @return A new instance of fragment FragmentMenu.
      */
     // TODO: Rename and change types and number of parameters
-    public static FragmentMenu newInstance(String param1, String param2) {
-        FragmentMenu fragment = new FragmentMenu();
+    public static FragmentClassic newInstance(String param1, String param2) {
+        FragmentClassic fragment = new FragmentClassic();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,29 +68,11 @@ public class FragmentMenu extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
-        setupVariables(rootView);
+        View rootView = inflater.inflate(R.layout.fragment_classic, container, false);
+        //setupVariables(rootView);
         return rootView;
     }
 
-    private void setupVariables(View rootView) {
-        bClassic = (Button) rootView.findViewById(R.id.bClassic);
-        bClassic.setBackgroundResource(R.drawable.default_button_selector);
-        bClassic.setOnClickListener(this);
-
-        bDeluxe = (Button) rootView.findViewById(R.id.bDeluxe);
-        bDeluxe.setBackgroundResource(R.drawable.default_button_selector);
-        bDeluxe.setOnClickListener(this);
-
-        bHowToPlay = (Button) rootView.findViewById(R.id.bHowToPlay);
-        bHowToPlay.setBackgroundResource(R.drawable.default_button_selector);
-        bHowToPlay.setOnClickListener(this);
-
-        bAbout = (Button) rootView.findViewById(R.id.bAbout);
-        bAbout.setBackgroundResource(R.drawable.default_button_selector);
-        bAbout.setOnClickListener(this);
-
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -122,15 +101,6 @@ public class FragmentMenu extends Fragment implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-
-        if (bClassic.isPressed()) {
-
-            FragmentClassic fragmentClassic = new FragmentClassic();
-
-//            Intent classicIntent = new Intent(this, Classic.class);
-//            startActivity(classicIntent);
-        }
-
 
     }
 
