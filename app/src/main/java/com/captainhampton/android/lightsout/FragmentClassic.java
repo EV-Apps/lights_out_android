@@ -28,7 +28,7 @@ public class FragmentClassic extends Fragment implements OnClickListener {
     private String mParam1;
     private String mParam2;
 
-    public static final String TAG = "FragmentMenu";
+    public static final String TAG = "FragmentClassic";
 
 
     private OnFragmentInteractionListener mListener;
