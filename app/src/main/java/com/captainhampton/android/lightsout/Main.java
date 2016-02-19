@@ -12,7 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener {
+public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener 
+// , FragmentClassic.OnFragmentInteractionListener
+{
+    
 
 
     Button bClassic, bDeluxe, bHowToPlay, bAbout;
@@ -60,10 +63,10 @@ public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentIn
      create multiple different methods, or if the logic is simple routing, pass a parameter ex. FragmentMenu.TAG
          implying of the location you are going to or even as simple as an int 1 (for now)*/) {
 
-//        Fragment someNewFragment = SomeOtherScreen.newInstance();
+//        Fragment someNewFragment = SomeOtherScreen.newInstance("a","b");
 //        FragmentManager fragmentManager = getSupportFragmentManager();
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //
-//        fragmentTransaction.replace(R.id.menu_screen, someNewFragment, FragmentMenu.TAG).commit();
+//        fragmentTransaction.replace(R.id.menu_screen, someNewFragment, SomeNewFragment.TAG).commit();
     }
 }
