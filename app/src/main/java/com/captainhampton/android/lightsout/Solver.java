@@ -2,9 +2,6 @@ package com.captainhampton.android.lightsout;
 
 import org.ejml.simple.SimpleMatrix;
 
-/**
- * Created by User on 2/16/2016.
- */
 public class Solver {
 
     int NUM_ROWS, NUM_COLS;
@@ -13,7 +10,7 @@ public class Solver {
         NUM_ROWS = numRows;
     }
 
-    public boolean isConfigSolvable5x5(boolean[][] light_states) {
+    public boolean isConfigSolvable(boolean[][] light_states) {
 
         // 5x5 configuration is solvable if the vector of lights are orthogonal to these two
         // vectors n1 and n2 that correspond to vectors in the null space of the adjacency matrix
@@ -26,11 +23,15 @@ public class Solver {
         n2 = n2.transpose();
 
         SimpleMatrix light_vector = calculateLightVector(light_states);
-        SimpleMatrix val1 = light_vector.mult(n1);
-        SimpleMatrix val2 = light_vector.mult(n2);
+        SimpleMatrix vec1 = light_vector.mult(n1);
+        SimpleMatrix vec2 = light_vector.mult(n2);
 
-        // TODO: CHECK THIS
-        return ( val1.elementSum() == 0 && val2.elementSum() == 0 );
+        double val1 = vec1.get(0, 0);
+        double val2 = vec2.get(0,0);
+
+        // If inner product of both vectors n1 and n2 from the null space are orthogonal (mod 2)
+        // then the configuration is solvable.
+        return ( val1 % 2 == 0 && val2 % 2 == 0 );
     }
 
     public static int findFirstIdx(SimpleMatrix C) {
