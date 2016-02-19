@@ -38,7 +38,7 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.classic);
         setupVariables();
         solver = new Solver(NUM_ROWS, NUM_COLS);
-    };
+    }
 
 
     private void setLevel(int lvl) {

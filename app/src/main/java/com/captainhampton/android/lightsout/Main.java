@@ -1,6 +1,5 @@
 package com.captainhampton.android.lightsout;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,16 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener 
-// , FragmentClassic.OnFragmentInteractionListener
-{
-    
-
-
-    Button bClassic, bDeluxe, bHowToPlay, bAbout;
+public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener, FragmentClassic.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +54,10 @@ public class Main extends AppCompatActivity implements FragmentMenu.OnFragmentIn
      create multiple different methods, or if the logic is simple routing, pass a parameter ex. FragmentMenu.TAG
          implying of the location you are going to or even as simple as an int 1 (for now)*/) {
 
-//        Fragment someNewFragment = SomeOtherScreen.newInstance("a","b");
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//
-//        fragmentTransaction.replace(R.id.menu_screen, someNewFragment, SomeNewFragment.TAG).commit();
+        Fragment someNewFragment = FragmentClassic.newInstance("a","b");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.menu_screen, someNewFragment, FragmentClassic.TAG).commit();
     }
 }
