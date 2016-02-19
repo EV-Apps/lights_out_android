@@ -13,28 +13,6 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
     public Button bHome, bHint, bReset;
     public TextView tvNumMoves, tvLevelTime;
 
-    private static final int[][][] LEVELS = {
-            { {1,2}, {2,1}, {2,2}, {2,3}, {3,2} },
-            { {1,0}, {1,4}, {2,0}, {2,1}, {2,3}, {2,4}, {3,0}, {3,4} },
-            { {0,3}, {0,4}, {1,2}, {1,4}, {2,1}, {2,2}, {2,3}, {3,0}, {3,2}, {4,0}, {4,1}  },
-            { {0,0}, {0,1}, {0,3}, {0,4}, {1,0}, {1,4}, {3,0}, {3,4}, {4,0}, {4,1}, {4,3}, {4,4} },
-            { {0,0}, {0,1}, {0,3}, {0,4}, {1,0}, {1,2}, {1,4}, {2,1}, {2,2}, {2,3}, {3,0}, {3,2}, {3,4}, {4,0}, {4,1}, {4,3}, {4,4} },
-            { {2,0}, {2,2}, {2,4} },
-            { {0,0}, {0,2}, {0,4}, {1,0}, {1,2}, {1,4}, {3,0}, {3,2}, {3,4}, {4,0}, {4,2}, {4,4} },
-            { {0,1}, {0,3}, {1,0}, {1,1}, {1,3}, {1,4}, {2,0}, {2,1}, {2,3}, {2,4}, {3,0}, {3,1}, {3,3}, {3,4}, {4,1}, {4,3} },
-            { {1,0}, {1,1}, {1,3}, {1,4}, {3,0}, {3,4}, {4,0}, {4,1}, {4,3}, {4,4} },
-            { {0,0}, {0,1}, {0,2}, {0,3}, {1,0}, {1,1}, {1,2}, {1,4}, {2,0}, {2,1}, {2,2}, {2,4}, {3,3}, {3,4}, {4,0}, {4,1}, {4,3}, {4,4} },
-            { {2,0}, {2,2}, {2,4}, {3,0}, {3,2}, {3,4}, {4,1}, {4,2}, {4,3} },
-            { {0,0}, {0,1}, {0,2}, {0,3}, {1,0}, {1,4}, {2,0}, {2,4}, {3,0}, {3,4}, {4,0}, {4,1}, {4,2}, {4,3} },
-            { {1,2}, {2,1}, {2,3}, {3,0}, {3,2}, {3,4}, {4,1}, {4,3} },
-            { {0,1}, {0,3}, {1,0}, {1,1}, {1,2}, {1,3}, {1,4}, {2,1}, {2,2}, {2,3}, {3,1}, {3,3}, {3,4}, {4,0}, {4,1}, {4,2} },
-            { {0,1}, {0,2}, {0,3}, {1,1}, {1,2}, {1,3}, {2,1}, {2,2}, {2,3} },
-            { {0,0}, {0,2}, {0,4}, {1,0}, {1,2}, {1,4}, {2,0}, {2,2}, {2,4}, {3,0}, {3,2}, {3,4}, {4,1}, {4,2}, {4,3} },
-            { {0,0}, {0,1}, {0,2}, {0,3}, {0,4}, {1,1}, {1,3}, {2,0}, {2,1}, {2,3}, {2,4}, {3,1}, {3,2}, {3,3}, {4,1}, {4,3}  },
-            { {0,3}, {1,2}, {1,4}, {2,1}, {2,3}, {3,0}, {3,2}, {4,1} },
-            { {2,1}, {3,1}, {4,1} },
-    };
-
     private static final int[][] LIGHT_IDS = {
             { R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4 },
             { R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9 },
@@ -141,9 +119,9 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
 
         clearBoard();
 
-        for (int i = 0; i < LEVELS[level_num].length; i++) {
-            int x = LEVELS[level_num][i][0];
-            int y = LEVELS[level_num][i][1];
+        for (int i = 0; i < Levels.LEVELS[level_num].length; i++) {
+            int x = Levels.LEVELS[level_num][i][0];
+            int y = Levels.LEVELS[level_num][i][1];
 
             activateButton(x, y);
         }
@@ -195,7 +173,7 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
                         if ( checkVictory() ) {
                             // TODO : victory dance
                             level_num++;
-                            if (level_num <= LEVELS.length) {
+                            if (level_num <= Levels.LEVELS.length) {
                                 setLevel(level_num);
                                 setupBoard();
                             } else {

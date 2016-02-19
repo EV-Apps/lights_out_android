@@ -142,7 +142,7 @@ public class Solver {
         boolean[][] solution = new boolean[NUM_ROWS][NUM_COLS];
 
 
-        SimpleMatrix A = SolverUtils.getAdjacencyMatrix(5);
+        SimpleMatrix A = SolverUtils.getAdjacencyMatrix(NUM_ROWS, NUM_COLS);
         SimpleMatrix b;
         b = calculateLightVector(light_states);
         A = A.combine(0, A.numCols(), b.transpose());

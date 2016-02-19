@@ -7,7 +7,7 @@ import org.ejml.simple.SimpleMatrix;
  */
 public class SolverUtils {
 
-    public static SimpleMatrix getAdjacencyMatrix(int size) {
+    public static SimpleMatrix getAdjacencyMatrix(int numRows, int numCols) {
 
             return new SimpleMatrix(new double[][]
                 {
