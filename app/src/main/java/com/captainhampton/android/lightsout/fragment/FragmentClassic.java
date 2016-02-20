@@ -1,18 +1,25 @@
-package com.captainhampton.android.lightsout;
+package com.captainhampton.android.lightsout.fragment;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.captainhampton.android.lightsout.solver.Levels;
+import com.captainhampton.android.lightsout.R;
+import com.captainhampton.android.lightsout.solver.Solver;
 
-public class Classic extends AppCompatActivity implements View.OnClickListener {
 
-    public Button bHome, bHint, bReset;
-    public TextView tvNumMoves, tvLevelTime;
+public class FragmentClassic extends Fragment implements OnClickListener {
 
+    public static final String TAG = "FragmentClassic";
     private static final int[][] LIGHT_IDS = {
             { R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4 },
             { R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9 },
@@ -20,26 +27,45 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
             { R.id.button15, R.id.button16, R.id.button17, R.id.button18, R.id.button19 },
             { R.id.button20, R.id.button21, R.id.button22, R.id.button23, R.id.button24 },
     };
-
     private static final int NUM_ROWS = 5;
     private static final int NUM_COLS = 5;
-
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+    public Button bHome, bHint, bReset;
+    public TextView tvNumMoves, tvLevelTime;
     private Button[][] lights = new Button[NUM_ROWS][NUM_COLS];
     private boolean[][] light_states = new boolean[NUM_ROWS][NUM_COLS];
-
     private int level_num = 0;
     private int num_moves;
     private long level_time; // System.nanoTime()
     private Solver solver;
+    private String mParam1;
+    private String mParam2;
+    private OnFragmentInteractionListener mListener;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.classic);
-        setupVariables();
-        solver = new Solver(NUM_ROWS, NUM_COLS);
+    public FragmentClassic() {
+        // Required empty public constructor
     }
 
+    public static FragmentClassic newInstance(String param1, String param2) {
+        FragmentClassic fragment = new FragmentClassic();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        solver = new Solver(NUM_ROWS, NUM_COLS);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
     private void setLevel(int lvl) {
         level_num = lvl;
@@ -138,26 +164,26 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
         return true;
     }
 
-    private void setupVariables() {
+    private void setupVariables(View view) {
 
-        bHome = (Button)findViewById(R.id.bHome);
+        bHome = (Button)view.findViewById(R.id.bHome);
         bHome.setOnClickListener(this);
 
-        bReset = (Button)findViewById(R.id.bReset);
+        bReset = (Button)view.findViewById(R.id.bReset);
         bReset.setOnClickListener(this);
 
-        bHint = (Button)findViewById(R.id.bHint);
+        bHint = (Button)view.findViewById(R.id.bHint);
         bHint.setOnClickListener(this);
 
-        tvNumMoves = (TextView)findViewById(R.id.tvNumMoves);
-        tvLevelTime = (TextView)findViewById(R.id.tvLevelTime);
+        tvNumMoves = (TextView)view.findViewById(R.id.tvNumMoves);
+        tvLevelTime = (TextView)view.findViewById(R.id.tvLevelTime);
 
         for (int i = 0; i < NUM_ROWS; i++) {
             for (int j = 0; j < NUM_COLS; j++) {
 
                 final int x = i;
                 final int y = j;
-                lights[x][y] = (Button)findViewById(LIGHT_IDS[x][y]);
+                lights[x][y] = (Button)view.findViewById(LIGHT_IDS[x][y]);
                 lights[x][y].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -211,6 +237,41 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
 
     }
 
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.classic, container, false);
+        setupVariables(view);
+        return view;
+    }
+
+
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(3);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
     @Override
     public void onClick(View v) {
 
@@ -224,4 +285,7 @@ public class Classic extends AppCompatActivity implements View.OnClickListener {
 
     }
 
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(int i);
+    }
 }

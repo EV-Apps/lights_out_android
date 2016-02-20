@@ -1,7 +1,6 @@
-package com.captainhampton.android.lightsout;
+package com.captainhampton.android.lightsout.fragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +8,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.captainhampton.android.lightsout.R;
 
 public class FragmentMenu extends Fragment implements OnClickListener {
 
