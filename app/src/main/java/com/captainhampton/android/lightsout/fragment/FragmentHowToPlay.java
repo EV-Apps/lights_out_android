@@ -1,9 +1,13 @@
-package com.captainhampton.android.lightsout;
+package com.captainhampton.android.lightsout.fragment;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class HowToPlay extends AppCompatActivity {
+import com.captainhampton.android.lightsout.R;
+
+public class FragmentHowToPlay extends AppCompatActivity {
+
+    // TODO: convert to fragment
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

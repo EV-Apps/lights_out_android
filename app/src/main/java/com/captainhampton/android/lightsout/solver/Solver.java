@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout;
+package com.captainhampton.android.lightsout.solver;
 
 import org.ejml.simple.SimpleMatrix;
 
@@ -10,36 +10,12 @@ public class Solver {
         NUM_ROWS = numRows;
     }
 
-    public boolean isConfigSolvable(boolean[][] light_states) {
-
-        // 5x5 configuration is solvable if the vector of lights are orthogonal to these two
-        // vectors n1 and n2 that correspond to vectors in the null space of the adjacency matrix
-        // of the game board. (https://www.math.ksu.edu/math551/math551a.f06/lights_out.pdf)
-        SimpleMatrix n1 = new SimpleMatrix(new double[][]
-                { {0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0} });
-        n1 = n1.transpose();
-        SimpleMatrix n2 = new SimpleMatrix(new double[][]
-                { {1,0,1,0,1,1,0,1,0,1,0,0,0,0,0,1,0,1,0,1,1,0,1,0,1} });
-        n2 = n2.transpose();
-
-        SimpleMatrix light_vector = calculateLightVector(light_states);
-        SimpleMatrix vec1 = light_vector.mult(n1);
-        SimpleMatrix vec2 = light_vector.mult(n2);
-
-        double val1 = vec1.get(0, 0);
-        double val2 = vec2.get(0,0);
-
-        // If inner product of both vectors n1 and n2 from the null space are orthogonal (mod 2)
-        // then the configuration is solvable.
-        return ( val1 % 2 == 0 && val2 % 2 == 0 );
-    }
-
     public static int findFirstIdx(SimpleMatrix C) {
         int idx = -1;
         for (int n = 0; n < C.numRows(); n++) {
             for (int m = 0; m < C.numCols(); m++) {
-                if ( C.get(n,m) == 1 ) {
-                    idx = C.getIndex(n,m);
+                if (C.get(n, m) == 1) {
+                    idx = C.getIndex(n, m);
                     return idx;
                 }
             }
@@ -135,6 +111,30 @@ public class Solver {
         }
 
         return A;
+    }
+
+    public boolean isConfigSolvable(boolean[][] light_states) {
+
+        // 5x5 configuration is solvable if the vector of lights are orthogonal to these two
+        // vectors n1 and n2 that correspond to vectors in the null space of the adjacency matrix
+        // of the game board. (https://www.math.ksu.edu/math551/math551a.f06/lights_out.pdf)
+        SimpleMatrix n1 = new SimpleMatrix(new double[][]
+                {{0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0}});
+        n1 = n1.transpose();
+        SimpleMatrix n2 = new SimpleMatrix(new double[][]
+                {{1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1}});
+        n2 = n2.transpose();
+
+        SimpleMatrix light_vector = calculateLightVector(light_states);
+        SimpleMatrix vec1 = light_vector.mult(n1);
+        SimpleMatrix vec2 = light_vector.mult(n2);
+
+        double val1 = vec1.get(0, 0);
+        double val2 = vec2.get(0, 0);
+
+        // If inner product of both vectors n1 and n2 from the null space are orthogonal (mod 2)
+        // then the configuration is solvable.
+        return (val1 % 2 == 0 && val2 % 2 == 0);
     }
 
     public boolean[][] calculateWinningConfig(boolean[][] light_states) {

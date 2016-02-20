@@ -5,8 +5,8 @@
     android:id="@+id/menu_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.captainhampton.android.lightsout.Main"
-    android:background="#d31010">
+    android:background="#d31010"
+    tools:context=".activity.ActivityMain">
 </FrameLayout>
 
 

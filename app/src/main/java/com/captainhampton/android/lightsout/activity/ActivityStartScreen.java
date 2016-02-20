@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout;
+package com.captainhampton.android.lightsout.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-public class StartScreenActivity extends AppCompatActivity {
+import com.captainhampton.android.lightsout.R;
+
+public class ActivityStartScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,7 @@ public class StartScreenActivity extends AppCompatActivity {
         findViewById(R.id.start_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(StartScreenActivity.this, Main.class);
+                Intent i = new Intent(ActivityStartScreen.this, ActivityMain.class);
                 startActivity(i);
             }
         });

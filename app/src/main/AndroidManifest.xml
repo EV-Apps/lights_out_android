@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Main"
+            android:name=".activity.ActivityMain"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HowToPlay"
+            android:name=".fragment.FragmentHowToPlay"
             android:label="@string/button_how_to_play">
             <intent-filter>
                 <action android:name="android.intent.action.HOWTOPLAY" />
@@ -46,7 +46,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".About"
+            android:name=".fragment.FragmentAbout"
             android:label="@string/button_about">
             <intent-filter>
                 <action android:name="android.intent.action.ABOUT" />
@@ -55,7 +55,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StartScreenActivity"
+            android:name=".activity.ActivityStartScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_start_screen"
             android:theme="@style/FullscreenTheme">

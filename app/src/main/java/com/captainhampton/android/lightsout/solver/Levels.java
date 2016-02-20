@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout;
+package com.captainhampton.android.lightsout.solver;
 
 
 public class Levels {
