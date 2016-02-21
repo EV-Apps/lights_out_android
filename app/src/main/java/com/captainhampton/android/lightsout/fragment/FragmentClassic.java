@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.captainhampton.android.lightsout.solver.Levels;
 import com.captainhampton.android.lightsout.R;
+import com.captainhampton.android.lightsout.solver.Levels;
 import com.captainhampton.android.lightsout.solver.Solver;
 
 
@@ -144,6 +144,7 @@ public class FragmentClassic extends Fragment implements OnClickListener {
     private void setupBoard() {
 
         clearBoard();
+        clearSolution();
 
         for (int i = 0; i < Levels.LEVELS[level_num].length; i++) {
             int x = Levels.LEVELS[level_num][i][0];
