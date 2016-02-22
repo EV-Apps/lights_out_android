@@ -1,5 +1,7 @@
 package com.captainhampton.android.lightsout.solver;
 
+import com.captainhampton.android.lightsout.fragment.FragmentClassic;
+
 import org.ejml.simple.SimpleMatrix;
 
 public class Solver {
@@ -9,6 +11,8 @@ public class Solver {
         NUM_COLS = numCols;
         NUM_ROWS = numRows;
     }
+    FragmentClassic classic = new FragmentClassic();
+    SolverUtils solverUtils = new SolverUtils();
 
     public static int findFirstIdx(SimpleMatrix C) {
         int idx = -1;
@@ -44,7 +48,7 @@ public class Solver {
         return M;
     }
 
-    public  static SimpleMatrix logicalSymmetricDifference(SimpleMatrix M, SimpleMatrix flip) {
+    public static SimpleMatrix logicalSymmetricDifference(SimpleMatrix M, SimpleMatrix flip) {
 
         SimpleMatrix P = new SimpleMatrix(new double[M.numRows()][M.numCols()]);
 
@@ -143,13 +147,13 @@ public class Solver {
         boolean[][] solution = new boolean[NUM_ROWS][NUM_COLS];
 
 
-        SimpleMatrix A = SolverUtils.getAdjacencyMatrix(NUM_ROWS, NUM_COLS);
+        SimpleMatrix A = solverUtils.getAdjacencyMatrix(NUM_ROWS, NUM_COLS);
         SimpleMatrix b;
         b = calculateLightVector(light_states);
         A = A.combine(0, A.numCols(), b.transpose());
         A = g2rref(A);
 
-        SimpleMatrix x = getCol(A,A.numCols()-1,0);
+        SimpleMatrix x = getCol(A, A.numCols() - 1, 0);
 
         int x_size = 0;
         for (int i = 0; i < NUM_ROWS; i++) {
@@ -181,6 +185,31 @@ public class Solver {
         }
 
         return vec;
+    }
+
+    public double[] getAdjacentPositions(int x, int y) {
+        double[] adj_pos_vec = new double[NUM_ROWS * NUM_COLS];
+
+        int top = x - 1;
+        int bot = x + 1;
+        int left = y - 1;
+        int right = y + 1;
+
+        adj_pos_vec[x * NUM_ROWS + y] = 1;
+
+        if ( !classic.isLightOutOfBounds(top, y) )
+            adj_pos_vec[top * NUM_ROWS + y] = 1;
+
+        if ( !classic.isLightOutOfBounds(bot, y) )
+            adj_pos_vec[bot * NUM_ROWS + y] = 1;
+
+        if ( !classic.isLightOutOfBounds(x, left) )
+            adj_pos_vec[x * NUM_ROWS + left] = 1;
+
+        if ( !classic.isLightOutOfBounds(x, right) )
+            adj_pos_vec[x * NUM_ROWS + right] = 1;
+
+        return adj_pos_vec;
     }
 
 

@@ -98,7 +98,7 @@ public class FragmentClassic extends Fragment implements OnClickListener {
             activateButton(x, y);
     }
 
-    private boolean isLightOutOfBounds(int x, int y) {
+    public boolean isLightOutOfBounds(int x, int y) {
         return ( x >= NUM_ROWS || x < 0 || y >= NUM_COLS || y < 0 );
     }
 
