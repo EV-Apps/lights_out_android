@@ -12,7 +12,6 @@ public class Solver {
         NUM_ROWS = numRows;
     }
     FragmentClassic classic = new FragmentClassic();
-    SolverUtils solverUtils = new SolverUtils();
 
     public static int findFirstIdx(SimpleMatrix C) {
         int idx = -1;
@@ -147,7 +146,7 @@ public class Solver {
         boolean[][] solution = new boolean[NUM_ROWS][NUM_COLS];
 
 
-        SimpleMatrix A = solverUtils.getAdjacencyMatrix(NUM_ROWS, NUM_COLS);
+        SimpleMatrix A = SolverUtils.getAdjacencyMatrix(NUM_ROWS, NUM_COLS);
         SimpleMatrix b;
         b = calculateLightVector(light_states);
         A = A.combine(0, A.numCols(), b.transpose());
