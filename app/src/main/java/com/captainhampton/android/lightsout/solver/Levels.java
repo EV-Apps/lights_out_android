@@ -3,7 +3,7 @@ package com.captainhampton.android.lightsout.solver;
 
 public class Levels {
 
-    public static final int[][][] LEVELS = {
+    public static final int[][][] LEVELS_5x5 = {
             { {1,2}, {2,1}, {2,2}, {2,3}, {3,2} },
             { {1,0}, {1,4}, {2,0}, {2,1}, {2,3}, {2,4}, {3,0}, {3,4} },
             { {0,3}, {0,4}, {1,2}, {1,4}, {2,1}, {2,2}, {2,3}, {3,0}, {3,2}, {4,0}, {4,1}  },
@@ -24,5 +24,21 @@ public class Levels {
             { {0,3}, {1,2}, {1,4}, {2,1}, {2,3}, {3,0}, {3,2}, {4,1} },
             { {2,1}, {3,1}, {4,1} },
     };
+
+    public static final int[][][] LEVELS_6x6 = {
+            { {0,0}, {0,3}, {0,5}, {1,0}, {1,2}, {1,3}, {1,5}, {2,2}, {2,4}, {3,2}, {3,3}, {4,4}, {5,1}, {5,2}, {5,4} },
+    };
+
+    public static int[][][] getLevels(int numRows, int numCols) {
+
+        if (numRows == 5 && numCols == 5)
+            return LEVELS_5x5;
+
+        if (numRows == 6 && numCols == 6)
+            return LEVELS_6x6;
+
+        return LEVELS_5x5;
+
+    }
 
 }

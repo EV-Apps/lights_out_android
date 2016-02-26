@@ -12,8 +12,11 @@ import android.view.MenuItem;
 import com.captainhampton.android.lightsout.R;
 import com.captainhampton.android.lightsout.fragment.FragmentClassic;
 import com.captainhampton.android.lightsout.fragment.FragmentMenu;
+import com.captainhampton.android.lightsout.fragment.FragmentRandom;
 
-public class ActivityMain extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener, FragmentClassic.OnFragmentInteractionListener {
+public class ActivityMain extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener,
+        FragmentClassic.OnFragmentInteractionListener,
+        FragmentRandom.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +61,10 @@ public class ActivityMain extends AppCompatActivity implements FragmentMenu.OnFr
      create multiple different methods, or if the logic is simple routing, pass a parameter ex. FragmentMenu.TAG
          implying of the location you are going to or even as simple as an int 1 (for now)*/) {
 
-        Fragment someNewFragment = FragmentClassic.newInstance("a","b");
+        Fragment someNewFragment = FragmentRandom.newInstance("a", "b");
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.replace(R.id.menu_screen, someNewFragment, FragmentClassic.TAG).commit();
+        fragmentTransaction.replace(R.id.menu_screen, someNewFragment, FragmentRandom.TAG).commit();
     }
 }

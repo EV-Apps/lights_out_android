@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.captainhampton.android.lightsout.R;
@@ -17,16 +19,10 @@ import com.captainhampton.android.lightsout.solver.Levels;
 import com.captainhampton.android.lightsout.solver.Solver;
 
 
-public class FragmentClassic extends Fragment implements OnClickListener {
+public class FragmentRandom extends Fragment implements OnClickListener {
 
-    public static final String TAG = "FragmentClassic";
-    private static final int[][] LIGHT_IDS = {
-            { R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4 },
-            { R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9 },
-            { R.id.button10, R.id.button11, R.id.button12, R.id.button13, R.id.button14 },
-            { R.id.button15, R.id.button16, R.id.button17, R.id.button18, R.id.button19 },
-            { R.id.button20, R.id.button21, R.id.button22, R.id.button23, R.id.button24 },
-    };
+    public static final String TAG = "FragmentRandom";
+
     private static final int NUM_ROWS = 5;
     private static final int NUM_COLS = 5;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +31,7 @@ public class FragmentClassic extends Fragment implements OnClickListener {
     public Button bHome, bHint, bReset;
     public TextView tvNumMoves, tvLevelTime;
     private Button[][] lights = new Button[NUM_ROWS][NUM_COLS];
+
     private boolean[][] light_states = new boolean[NUM_ROWS][NUM_COLS];
     private int level_num = 0;
     private int num_moves;
@@ -44,12 +41,12 @@ public class FragmentClassic extends Fragment implements OnClickListener {
     private String mParam2;
     private OnFragmentInteractionListener mListener;
 
-    public FragmentClassic() {
+    public FragmentRandom() {
         // Required empty public constructor
     }
 
-    public static FragmentClassic newInstance(String param1, String param2) {
-        FragmentClassic fragment = new FragmentClassic();
+    public static FragmentRandom newInstance(String param1, String param2) {
+        FragmentRandom fragment = new FragmentRandom();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -168,6 +165,8 @@ public class FragmentClassic extends Fragment implements OnClickListener {
 
     private void setupVariables(View view) {
 
+        TableLayout table = (TableLayout) view.findViewById(R.id.tbRandom);
+
         bHome = (Button)view.findViewById(R.id.bHome);
         bHome.setOnClickListener(this);
 
@@ -181,16 +180,35 @@ public class FragmentClassic extends Fragment implements OnClickListener {
         tvLevelTime = (TextView)view.findViewById(R.id.tvLevelTime);
 
         for (int i = 0; i < NUM_ROWS; i++) {
+            TableRow tableRow = new TableRow(getActivity());
+            tableRow.setLayoutParams(new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.MATCH_PARENT,
+                    TableLayout.LayoutParams.MATCH_PARENT,
+                    1.0f
+            ));
+            table.addView(tableRow);
             for (int j = 0; j < NUM_COLS; j++) {
 
                 final int x = i;
                 final int y = j;
-                lights[x][y] = (Button)view.findViewById(LIGHT_IDS[x][y]);
-                lights[x][y].setOnClickListener(new View.OnClickListener() {
+                Button button = new Button(getActivity());
+                button.setLayoutParams(new TableRow.LayoutParams(
+                        TableRow.LayoutParams.MATCH_PARENT,
+                        TableRow.LayoutParams.MATCH_PARENT,
+                        1.0f
+                ));
+
+                button.setText("" + y + "," + x);
+                // make text not clip on small buttons
+                button.setPadding(0, 0, 0, 0);
+                //lights[x][y] = (Button)view.findViewById(LIGHT_IDS[x][y]);
+                button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        if (lights[x][y].isPressed()) {
+                        Button button = lights[x][y];
+
+                        if (button.isPressed()) {
                             pressedLights(x, y);
                             clearSolution();
                             num_moves++;
@@ -198,10 +216,10 @@ public class FragmentClassic extends Fragment implements OnClickListener {
                             tvLevelTime.setText(String.format("%d", level_time));
                         }
 
-                        if ( checkVictory() ) {
+                        if (checkVictory()) {
                             // TODO : victory dance
                             level_num++;
-                            if (level_num <= Levels.getLevels(NUM_ROWS,NUM_COLS).length) {
+                            if (level_num <= Levels.getLevels(NUM_ROWS, NUM_COLS).length) {
                                 setLevel(level_num);
                                 setupBoard();
                             } else {
@@ -211,6 +229,9 @@ public class FragmentClassic extends Fragment implements OnClickListener {
 
                     }
                 });
+
+                tableRow.addView(button);
+                lights[x][y] = button;
 
             }
         }
@@ -244,7 +265,7 @@ public class FragmentClassic extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.classic, container, false);
+        View view = inflater.inflate(R.layout.random, container, false);
         setupVariables(view);
         return view;
     }
