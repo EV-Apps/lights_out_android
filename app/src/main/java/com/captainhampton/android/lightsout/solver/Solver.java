@@ -2,7 +2,7 @@ package com.captainhampton.android.lightsout.solver;
 
 import android.util.Log;
 
-import com.captainhampton.android.lightsout.fragment.FragmentClassic;
+import com.captainhampton.android.lightsout.fragment.FragmentRandom;
 
 import org.ejml.simple.SimpleMatrix;
 
@@ -13,7 +13,7 @@ public class Solver {
         NUM_COLS = numCols;
         NUM_ROWS = numRows;
     }
-    FragmentClassic classic = new FragmentClassic();
+    FragmentRandom random = new FragmentRandom();
 
     public static int findFirstIdx(SimpleMatrix C) {
         int idx = -1;
@@ -204,16 +204,16 @@ public class Solver {
 
         adj_pos_vec[x * NUM_ROWS + y] = 1;
 
-        if ( !classic.isLightOutOfBounds(top, y) )
+        if ( !random.isLightOutOfBounds(top, y) )
             adj_pos_vec[top * NUM_ROWS + y] = 1;
 
-        if ( !classic.isLightOutOfBounds(bot, y) )
+        if ( !random.isLightOutOfBounds(bot, y) )
             adj_pos_vec[bot * NUM_ROWS + y] = 1;
 
-        if ( !classic.isLightOutOfBounds(x, left) )
+        if ( !random.isLightOutOfBounds(x, left) )
             adj_pos_vec[x * NUM_ROWS + left] = 1;
 
-        if ( !classic.isLightOutOfBounds(x, right) )
+        if ( !random.isLightOutOfBounds(x, right) )
             adj_pos_vec[x * NUM_ROWS + right] = 1;
 
         return adj_pos_vec;
