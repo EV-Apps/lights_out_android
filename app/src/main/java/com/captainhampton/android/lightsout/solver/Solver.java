@@ -1,7 +1,5 @@
 package com.captainhampton.android.lightsout.solver;
 
-import android.util.Log;
-
 import com.captainhampton.android.lightsout.fragment.FragmentRandom;
 
 import org.ejml.simple.SimpleMatrix;
@@ -88,7 +86,6 @@ public class Solver {
 
             // Save the right hand side of the pivot row
             SimpleMatrix aijn = getRow(A,i,j);
-            Log.v("TAG", String.valueOf(aijn));
 
             // Column we're looking at
             SimpleMatrix col = getCol(A,j,0);
@@ -197,11 +194,6 @@ public class Solver {
         int left = y - 1;
         int right = y + 1;
 
-        Log.v("TEST",String.valueOf(top * NUM_ROWS + y));
-        Log.v("TEST",String.valueOf(bot * NUM_ROWS + y));
-        Log.v("TEST",String.valueOf(x * NUM_ROWS + left));
-        Log.v("TEST",String.valueOf(x * NUM_ROWS + right));
-
         adj_pos_vec[x * NUM_ROWS + y] = 1;
 
         if ( !random.isLightOutOfBounds(top, y) )
@@ -218,7 +210,5 @@ public class Solver {
 
         return adj_pos_vec;
     }
-
-
 
 }
