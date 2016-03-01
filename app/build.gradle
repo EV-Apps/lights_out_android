@@ -27,4 +27,7 @@ dependencies {
     compile 'org.ejml:all:0.29'
     compile 'com.pddstudio:starview:1.0.0'
     compile 'com.android.support:support-v4:23.1.1'
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.6@aar') {
+        transitive = true
+    }
 }

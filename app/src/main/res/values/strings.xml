@@ -15,6 +15,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_content">Tiger electronics \"Lights Out!\" made by Ersin(ersin-ertan) and Vincent(vprusso).</string>
+    <string name="about_title">About</string>
+    <string name="howToPlay_title">How To Play</string>
+    <string name="howToPlay_content">The goal is to turn all the lights off, but watch out, each button press will trigger the surrounding lights to switch current state.</string>
 
 
 </resources>

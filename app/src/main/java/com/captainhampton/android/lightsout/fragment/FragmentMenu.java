@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.captainhampton.android.lightsout.R;
 
 public class FragmentMenu extends Fragment implements OnClickListener {
@@ -103,9 +104,17 @@ public class FragmentMenu extends Fragment implements OnClickListener {
             if (mListener != null) {
                 mListener.onStartButtonPressed();
             }
-//            FragmentClassic fragmentClassic = new FragmentClassic();
-//            Intent classicIntent = new Intent(this, Classic.class);
-//            startActivity(classicIntent);
+//
+        } else if (bAbout.isPressed()) {
+            new MaterialDialog.Builder(getContext())
+                    .title(R.string.about_title)
+                    .content(R.string.about_content)
+                    .show();
+        } else if (bHowToPlay.isPressed()) {
+            new MaterialDialog.Builder(getContext())
+                    .title(R.string.howToPlay_title)
+                    .content(R.string.howToPlay_content)
+                    .show();
         }
 
 
