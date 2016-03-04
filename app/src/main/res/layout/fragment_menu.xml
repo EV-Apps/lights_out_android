@@ -16,64 +16,74 @@
 
     <TextView
         android:id="@+id/menu_screen_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:gravity="center"
         android:text="@string/lights_out_title"
         android:textColor="@color/black_pure"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_widthPercent="100%"
+        app:layout_heightPercent="20%"
         />
 
-
-    <LinearLayout
+    <GridLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/menu_screen_title"
-        android:orientation="horizontal"
-        app:layout_heightPercent="20%">
+        android:columnCount="2"
+        android:rowCount="2"
+        >
+
 
         <Button
             android:id="@+id/bClassic"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="@string/button_classic"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_margin="@dimen/md_icon_margin" />
 
         <Button
+            android:layout_margin="@dimen/md_icon_margin"
             android:id="@+id/bDeluxe"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="0dip"
             android:text="@string/button_deluxe"
-            android:textSize="30sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/bot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/top"
-        android:orientation="horizontal">
+            android:textSize="30sp"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1" />
 
         <Button
+            android:layout_margin="@dimen/md_icon_margin"
             android:id="@+id/bHowToPlay"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="@string/button_how_to_play"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1" />
 
         <Button
+            android:layout_margin="@dimen/md_icon_margin"
             android:id="@+id/bAbout"
             android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="0dip"
             android:text="@string/button_about"
-            android:textSize="30sp" />
-    </LinearLayout>
+            android:textSize="30sp"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1" />
+    </GridLayout>
 
 </android.support.percent.PercentRelativeLayout>
