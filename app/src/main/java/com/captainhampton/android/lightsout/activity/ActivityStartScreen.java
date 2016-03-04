@@ -1,11 +1,14 @@
 package com.captainhampton.android.lightsout.activity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
+import com.captainhampton.android.lightsout.LOUtils;
 import com.captainhampton.android.lightsout.R;
 
 public class ActivityStartScreen extends AppCompatActivity {
@@ -15,6 +18,7 @@ public class ActivityStartScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_start_screen);
+        LOUtils.applyFont(this, R.id.start_screen_text, LOUtils.FONT_GEAR);
 
         findViewById(R.id.fullscreen_content_controls).setVisibility(View.VISIBLE);
 
