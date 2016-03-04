@@ -23,7 +23,8 @@
         android:textColor="@color/black_pure"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_widthPercent="100%" />
+        app:layout_widthPercent="100%"
+        />
 
 
     <LinearLayout

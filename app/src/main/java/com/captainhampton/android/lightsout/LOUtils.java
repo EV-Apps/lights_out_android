@@ -12,7 +12,8 @@ public class LOUtils {
     public static void applyFont(Activity activity, int id, String fontName) {
         TextView textView = (TextView) activity.findViewById(id);
         if (textView != null) {
-            textView.setTypeface(Typeface.createFromAsset(activity.getAssets(), "fonts/" + fontName));
+            Typeface tf = Typeface.createFromAsset(activity.getAssets(), "fonts/" + fontName);
+            textView.setTypeface(tf);
         }
     }
 }
