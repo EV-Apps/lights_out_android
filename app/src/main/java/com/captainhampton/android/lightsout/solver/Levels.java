@@ -103,4 +103,14 @@ public class Levels {
 
     }
 
+    public static enum ImplementedLevels {
+        Level3x3,
+        Level3x4,
+        Level4x3,
+        Level4x4,
+        Level5x5,
+        Level6x6
+    }
+
+
 }
