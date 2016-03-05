@@ -117,6 +117,7 @@ public class FragmentMenu extends Fragment implements OnClickListener {
             }
 //
         } else if (bAbout.isPressed()) {
+            
             new MaterialDialog.Builder(getContext())
                     .title(R.string.about_title)
                     .content(R.string.about_content)

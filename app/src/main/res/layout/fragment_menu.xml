@@ -4,7 +4,6 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -22,13 +21,12 @@
         android:text="@string/lights_out_title"
         android:textColor="@color/black_pure"
         android:textSize="50sp"
-        android:textStyle="bold"
         app:layout_widthPercent="100%"
         app:layout_heightPercent="20%"
         />
 
     <GridLayout
-        android:id="@+id/top"
+        android:id="@+id/menu_gridlayout_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/menu_screen_title"
