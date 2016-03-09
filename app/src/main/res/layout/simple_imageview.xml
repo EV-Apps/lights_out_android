@@ -4,6 +4,7 @@
         android:id="@+id/imageview_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        >
+        android:src="@drawable/abc_scrubber_control_to_pressed_mtrl_000"
+        android:padding="@dimen/activity_vertical_margin">
 
     </ImageView>
