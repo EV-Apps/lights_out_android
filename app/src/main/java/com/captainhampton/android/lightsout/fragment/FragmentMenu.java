@@ -2,6 +2,7 @@ package com.captainhampton.android.lightsout.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.captainhampton.android.lightsout.LOUtils;
 import com.captainhampton.android.lightsout.R;
 
 public class FragmentMenu extends Fragment implements OnClickListener {
@@ -53,6 +55,7 @@ public class FragmentMenu extends Fragment implements OnClickListener {
     }
 
     private void setupVariables(View rootView) {
+
         bClassic = (Button) rootView.findViewById(R.id.bClassic);
         bClassic.setBackgroundResource(R.drawable.default_button_selector);
         bClassic.setOnClickListener(this);
@@ -68,6 +71,14 @@ public class FragmentMenu extends Fragment implements OnClickListener {
         bAbout = (Button) rootView.findViewById(R.id.bAbout);
         bAbout.setBackgroundResource(R.drawable.default_button_selector);
         bAbout.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        LOUtils.applyFont(getActivity(), R.id.menu_screen_title, LOUtils.FONT_GEAR);
 
     }
 
@@ -106,6 +117,7 @@ public class FragmentMenu extends Fragment implements OnClickListener {
             }
 //
         } else if (bAbout.isPressed()) {
+            
             new MaterialDialog.Builder(getContext())
                     .title(R.string.about_title)
                     .content(R.string.about_content)

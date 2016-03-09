@@ -1,6 +1,10 @@
 package com.captainhampton.android.lightsout.solver;
 
 
+import android.support.v4.util.Pair;
+
+import java.util.ArrayList;
+
 public class Levels {
 
     public static final int[][][] LEVELS_3x3 = {
@@ -103,4 +107,20 @@ public class Levels {
 
     }
 
+    public static ArrayList<ArrayList<Pair<Integer, Integer>>> transformLevelToList(int numRows, int numCols) {
+        int[][][] level = getLevels(numRows, numCols);
+
+        int avgNumbersOfLightsPerStage = 8; // arraylist will resize accordingly
+
+        ArrayList<ArrayList<Pair<Integer, Integer>>> levels = new ArrayList<>(level.length);
+        ArrayList<Pair<Integer, Integer>> stage = new ArrayList<>(avgNumbersOfLightsPerStage);
+
+        for (int a = 0; a < level.length-1; ++a) {
+            for (int b = 0; b < level[a].length-1; ++b) {
+                stage.add(new Pair<>(level[a][b][0], level[a][b][1]));
+            }
+            levels.add(stage);
+        }
+        return levels;
+    }
 }

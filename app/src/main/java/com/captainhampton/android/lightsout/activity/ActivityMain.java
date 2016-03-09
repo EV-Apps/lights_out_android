@@ -1,5 +1,6 @@
 package com.captainhampton.android.lightsout.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,13 +26,14 @@ public class ActivityMain extends AppCompatActivity implements FragmentMenu.OnFr
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
 
-        Fragment menu = FragmentMenu.newInstance("a", "b");
-        // use the public static newInstance method instead of a constructor
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.add(R.id.menu_screen, menu, FragmentMenu.TAG).commit();
+        if (fragmentManager.findFragmentByTag(FragmentMenu.TAG) == null) {
+
+            Fragment menu = FragmentMenu.newInstance("a", "b");
+            fragmentTransaction.add(R.id.menu_screen, menu, FragmentMenu.TAG).commit();
+        }
     }
 
 
@@ -61,10 +63,12 @@ public class ActivityMain extends AppCompatActivity implements FragmentMenu.OnFr
      create multiple different methods, or if the logic is simple routing, pass a parameter ex. FragmentMenu.TAG
          implying of the location you are going to or even as simple as an int 1 (for now)*/) {
 
-        Fragment someNewFragment = FragmentRandom.newInstance("a", "b");
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        startActivity(new Intent(this, ActivityLevelSelect.class));
 
-        fragmentTransaction.replace(R.id.menu_screen, someNewFragment, FragmentRandom.TAG).commit();
+//        Fragment someNewFragment = FragmentRandom.newInstance("a", "b");
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//        fragmentTransaction.replace(R.id.menu_screen, someNewFragment, FragmentRandom.TAG).commit();
     }
 }
