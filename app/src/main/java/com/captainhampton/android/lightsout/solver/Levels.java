@@ -1,6 +1,10 @@
 package com.captainhampton.android.lightsout.solver;
 
 
+import android.support.v4.util.Pair;
+
+import java.util.ArrayList;
+
 public class Levels {
 
     public static final int[][][] LEVELS_3x3 = {
