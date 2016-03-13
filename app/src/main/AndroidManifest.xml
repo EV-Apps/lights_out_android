@@ -11,7 +11,7 @@
         <activity
             android:name=".activity.ActivityMain"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,27 +22,27 @@
             android:name=".activity.ActivityStartScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_start_screen"
-            android:theme="@style/FullscreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".activity.ActivityLevelSelect"
-            android:label="@string/title_activity_activity_level_select"
-            android:parentActivityName=".activity.ActivityMain"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.captainhampton.android.lightsout.activity.ActivityMain" />
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.ActivityLevelSelect"
+            android:label="@string/title_activity_activity_level_select"
+            android:parentActivityName=".activity.ActivityMain"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.captainhampton.android.lightsout.activity.ActivityMain" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
-</manifest> <!-- <activity --><!-- android:name=".Classic" --><!-- android:label="@string/button_classic"> --><!-- <intent-filter> --><!-- <action android:name="android.intent.action.CLASSIC" /> --><!-- <category android:name="android.intent.category.DEFAULT" /> --><!-- </intent-filter> --><!-- </activity> --><!-- <activity --><!-- android:name=".Deluxe" --><!-- android:label="@string/button_deluxe"> --><!-- <intent-filter> --><!-- <action android:name="android.intent.action.DELUXE" /> --><!-- <category android:name="android.intent.category.DEFAULT" /> --><!-- </intent-filter> --><!-- </activity> -->
+</manifest>

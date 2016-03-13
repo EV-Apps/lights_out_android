@@ -20,7 +20,7 @@ public class FragmentMenu extends Fragment implements OnClickListener {
     public static final String TAG = "FragmentMenu";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    Button bClassic, bDeluxe, bHowToPlay, bAbout;
+    Button btnPlay, btnTodo, btnHowToPlay, btnAbout;
     private String mParam1;
     private String mParam2;
     private OnFragmentInteractionListener mListener;
@@ -56,21 +56,17 @@ public class FragmentMenu extends Fragment implements OnClickListener {
 
     private void setupVariables(View rootView) {
 
-        bClassic = (Button) rootView.findViewById(R.id.bClassic);
-        bClassic.setBackgroundResource(R.drawable.default_button_selector);
-        bClassic.setOnClickListener(this);
+        btnPlay = (Button) rootView.findViewById(R.id.button_play);
+        btnPlay.setOnClickListener(this);
 
-        bDeluxe = (Button) rootView.findViewById(R.id.bDeluxe);
-        bDeluxe.setBackgroundResource(R.drawable.default_button_selector);
-        bDeluxe.setOnClickListener(this);
+        btnTodo = (Button) rootView.findViewById(R.id.button_todo);
+        btnTodo.setOnClickListener(this);
 
-        bHowToPlay = (Button) rootView.findViewById(R.id.bHowToPlay);
-        bHowToPlay.setBackgroundResource(R.drawable.default_button_selector);
-        bHowToPlay.setOnClickListener(this);
+        btnHowToPlay = (Button) rootView.findViewById(R.id.button_howtoplay);
+        btnHowToPlay.setOnClickListener(this);
 
-        bAbout = (Button) rootView.findViewById(R.id.bAbout);
-        bAbout.setBackgroundResource(R.drawable.default_button_selector);
-        bAbout.setOnClickListener(this);
+        btnAbout = (Button) rootView.findViewById(R.id.button_about);
+        btnAbout.setOnClickListener(this);
 
     }
 
@@ -109,20 +105,20 @@ public class FragmentMenu extends Fragment implements OnClickListener {
     @Override
     public void onClick(View v) {
 
-        if (bClassic.isPressed()) {
+        if (btnPlay.isPressed()) {
 
             // use the activity callback interface to switch fragments
             if (mListener != null) {
                 mListener.onStartButtonPressed();
             }
 //
-        } else if (bAbout.isPressed()) {
+        } else if (btnAbout.isPressed()) {
             
             new MaterialDialog.Builder(getContext())
                     .title(R.string.about_title)
                     .content(R.string.about_content)
                     .show();
-        } else if (bHowToPlay.isPressed()) {
+        } else if (btnHowToPlay.isPressed()) {
             new MaterialDialog.Builder(getContext())
                     .title(R.string.howToPlay_title)
                     .content(R.string.howToPlay_content)
