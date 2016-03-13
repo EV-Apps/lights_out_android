@@ -13,9 +13,7 @@ import com.captainhampton.android.lightsout.R;
 import com.captainhampton.android.lightsout.fragment.FragmentMenu;
 import com.captainhampton.android.lightsout.solver.Levels;
 
-public class ActivityLevelSelect extends AppCompatActivity {
-
-    Levels.ImplementedLevels il;
+public class ActivityLevelSelect extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +30,11 @@ public class ActivityLevelSelect extends AppCompatActivity {
 
 
         // TODO FIX THIS STATIC SIZE OF 6 FOR THE LOVE OF GOD
-        for (int i = 0; i < 6; i++) {
+      //  for (int i = 0; i < 6; i++) {
 
-            Fragment menu = FragmentMenu.newInstance("a", "b");
-            fragmentTransaction.add(R.id.menu_screen, menu, FragmentMenu.TAG).commit();
-        }
+         //   Fragment menu = FragmentMenu.newInstance("a", "b");
+           // fragmentTransaction.add(R.id.menu_screen, menu, FragmentMenu.TAG).commit();
+       // }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,5 +48,13 @@ public class ActivityLevelSelect extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onFragmentInteraction(int i) {
 
+    }
+
+    @Override
+    public void onStartButtonPressed() {
+
+    }
 }
