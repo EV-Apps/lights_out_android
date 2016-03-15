@@ -25,11 +25,14 @@ public class HorizontalImageAdapter extends RecyclerView.Adapter<RecyclerViewHol
     ArrayList<ArrayList<Pair<Integer, Integer>>> stagesList;
     int layoutOfImageView = 0;
     int imageViewResourceId = 0;
+    int x, y;
 
-    public HorizontalImageAdapter(Context context, ArrayList<ArrayList<Pair<Integer, Integer>>> stages) {
+    public HorizontalImageAdapter(Context context, ArrayList<ArrayList<Pair<Integer, Integer>>> stages, Pair<Integer, Integer> xy) {
 
         this.context = context;
         stagesList = stages;
+        x = xy.first;
+        y = xy.second;
     }
 
     @Override

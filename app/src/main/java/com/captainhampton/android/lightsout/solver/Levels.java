@@ -108,19 +108,19 @@ public class Levels {
     }
 
     public static ArrayList<ArrayList<Pair<Integer, Integer>>> transformLevelToList(int numRows, int numCols) {
-        int[][][] level = getLevels(numRows, numCols);
+        int[][][] levels = getLevels(numRows, numCols);
 
         int avgNumbersOfLightsPerStage = 8; // arraylist will resize accordingly
 
-        ArrayList<ArrayList<Pair<Integer, Integer>>> levels = new ArrayList<>(level.length);
+        ArrayList<ArrayList<Pair<Integer, Integer>>> level = new ArrayList<>(levels.length);
         ArrayList<Pair<Integer, Integer>> stage = new ArrayList<>(avgNumbersOfLightsPerStage);
 
-        for (int a = 0; a < level.length-1; ++a) {
-            for (int b = 0; b < level[a].length-1; ++b) {
-                stage.add(new Pair<>(level[a][b][0], level[a][b][1]));
+        for (int a = 0; a < levels.length-1; ++a) {
+            for (int b = 0; b < levels[a].length-1; ++b) {
+                stage.add(new Pair<>(levels[a][b][0], levels[a][b][1]));
             }
-            levels.add(stage);
+            level.add(stage);
         }
-        return levels;
+        return level;
     }
 }

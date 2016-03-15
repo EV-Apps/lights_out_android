@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.captainhampton.android.lightsout.R;
+import com.captainhampton.android.lightsout.fragment.FragmentLevelSelect;
 import com.captainhampton.android.lightsout.fragment.FragmentMenu;
 import com.captainhampton.android.lightsout.solver.Levels;
 
@@ -19,22 +20,25 @@ public class ActivityLevelSelect extends AppCompatActivity implements FragmentMe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_select);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        if (fragmentManager.findFragmentByTag(FragmentMenu.TAG) == null) {
+//        for (int i = 0; i < 4; i++) {
+//            if (fragmentManager.findFragmentByTag(FragmentMenu.TAG+i) == null) {
+//            }
+//        }
 
 
-        }
-
-
+        FragmentLevelSelect fragmentLevelSelect = FragmentLevelSelect.newInstance(3, 3);
+        fragmentTransaction.add(R.id.level_select_scrollview, fragmentLevelSelect, "test").commit();
 
         // TODO FIX THIS STATIC SIZE OF 6 FOR THE LOVE OF GOD
-      //  for (int i = 0; i < 6; i++) {
+        //  for (int i = 0; i < 6; i++) {
 
-         //   Fragment menu = FragmentMenu.newInstance("a", "b");
-           // fragmentTransaction.add(R.id.menu_screen, menu, FragmentMenu.TAG).commit();
-       // }
+        //   Fragment menu = FragmentMenu.newInstance("a", "b");
+        // fragmentTransaction.add(R.id.menu_screen, menu, FragmentMenu.TAG).commit();
+        // }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
