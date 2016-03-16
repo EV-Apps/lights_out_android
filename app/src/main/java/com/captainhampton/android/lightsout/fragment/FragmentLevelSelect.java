@@ -18,6 +18,9 @@ import java.util.ArrayList;
 
 public class FragmentLevelSelect extends Fragment {
 
+    public static final String TAG = "FragmentLevelSelect";
+
+
     private static final String X = "param1";
     private static final String Y = "param2";
     private int x;

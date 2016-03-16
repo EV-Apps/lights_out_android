@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:id="@+id/level_select_scrollview"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.captainhampton.android.lightsout.activity.ActivityLevelSelect">
+    tools:context="com.captainhampton.android.lightsout.activity.ActivityLevelSelect"
+    android:background="@color/colorPrimaryDark">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:id="@+id/level_select_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            />
+
+    </ScrollView>
 
     <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--xmlns:tools="http://schemas.android.com/tools"-->
-        <!--android:id="@+id/fragment"-->
-        <!--android:name="com.captainhampton.android.lightsout.fragment.FragmentLevelSelect"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-        <!--tools:layout="@layout/fragment_level_select" />-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@+id/fragment"-->
+    <!--android:name="com.captainhampton.android.lightsout.fragment.FragmentLevelSelect"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+    <!--tools:layout="@layout/fragment_level_select" />-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -26,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+        android:background="@color/colorPrimary"
+        android:src="@android:drawable/ic_menu_help" />
 
 </FrameLayout>

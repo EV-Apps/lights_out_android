@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -22,29 +23,26 @@ public class ActivityLevelSelect extends AppCompatActivity implements FragmentMe
         setContentView(R.layout.activity_level_select);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-//        for (int i = 0; i < 4; i++) {
-//            if (fragmentManager.findFragmentByTag(FragmentMenu.TAG+i) == null) {
-//            }
-//        }
+        if (fragmentManager.findFragmentByTag(FragmentLevelSelect.TAG + "_3_3") == null) {
 
+            String tag;
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        FragmentLevelSelect fragmentLevelSelect = FragmentLevelSelect.newInstance(3, 3);
-        fragmentTransaction.add(R.id.level_select_scrollview, fragmentLevelSelect, "test").commit();
+            for (Pair<Integer, Integer> pair : Levels.levelList) {
 
-        // TODO FIX THIS STATIC SIZE OF 6 FOR THE LOVE OF GOD
-        //  for (int i = 0; i < 6; i++) {
-
-        //   Fragment menu = FragmentMenu.newInstance("a", "b");
-        // fragmentTransaction.add(R.id.menu_screen, menu, FragmentMenu.TAG).commit();
-        // }
+                FragmentLevelSelect fragmentLevelSelect = FragmentLevelSelect.newInstance(pair.first, pair.second);
+                tag = FragmentLevelSelect.TAG + "_" + Integer.toString(pair.first) + "_" + Integer.toString(pair.second);
+                fragmentTransaction.add(R.id.level_select_linearlayout, fragmentLevelSelect, tag);
+            }
+            fragmentTransaction.commit();
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "TODO Random level", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
