@@ -1,0 +1,11 @@
+CREATE TABLE level (
+  _id LONG NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name STRING NOT NULL UNIQUE,
+  num_rows INT NOT NULL,
+  num_cols INT NOT NULL,
+  is_locked BOOLEAN NOT NULL DEFAULT 0
+);
+
+select_all:
+SELECT *
+FROM level;

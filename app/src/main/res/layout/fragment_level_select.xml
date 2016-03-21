@@ -18,8 +18,9 @@
         android:id="@+id/level_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Level"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/title_level"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorAccent" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_recyclerview_levels"

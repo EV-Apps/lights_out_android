@@ -14,9 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.captainhampton.android.lightsout.R;
+import com.captainhampton.android.lightsout.activity.ActivityStartScreen;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.paperdb.Paper;
 
 public class HorizontalImageAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
@@ -33,6 +36,7 @@ public class HorizontalImageAdapter extends RecyclerView.Adapter<RecyclerViewHol
         stagesList = stages;
         x = xy.first;
         y = xy.second;
+        Paper.book().read(ActivityStartScreen.database);
     }
 
     @Override
