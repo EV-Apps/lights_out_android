@@ -1,40 +1,19 @@
 package com.captainhampton.android.lightsout.model;
 
-import android.support.v4.util.Pair;
 
 import com.google.auto.value.AutoValue;
 
-import java.util.ArrayList;
-import java.util.Collections;
+@AutoValue
+public abstract class Stage implements StageModel {
 
-//
-//@AutoValue
-//public abstract class Stage implements StageModel {
-//
-//    public static final Mapper<Stage> MAPPER = new Mapper<>(new Mapper.Creator<Stage>(){
-//        @Override public Level create(long Id, int numRows, int numCols, boolean isLocked){
-//            return new AutoValue_Level(Id, numRows, numCols, isLocked);
-//        }
-//    });
-//}
-
-
-public class Stage {
-
-    private int avgNumOfLightsOn = 8;
-    private ArrayList<Pair<Integer, Integer>> lightsOnList = new ArrayList<>(avgNumOfLightsOn);
-
-    public Stage(){ // lights on is the array of Pair<Integer,Integer>
-//        lightsOnList = Arrays.asList(lightsOn);
-    }
-
-    public ArrayList<Pair<Integer, Integer>> getLightsOnList() {
-        ArrayList<Pair<Integer, Integer>> copyList = new ArrayList<>(lightsOnList.size());
-        Collections.copy(copyList, lightsOnList);
-        return copyList;
-    }
-
+    public static final Mapper<Stage> MAPPER = new Mapper<>(new Mapper.Creator<Stage>() {
+        @Override
+        public Stage create(long Id, int numRows, int numCols, boolean isLocked, Long level, String startGrid) {
+            return new AutoValue_Stage(Id, numRows, numCols, isLocked, level, startGrid);
+        }
+    });
 }
+
 
 /*
 Todo Serialize the Arraylist<Pair<Integer, Integer>> for each stage's inital layout, do we need to create an initial layout class type, probably not
