@@ -11,5 +11,8 @@ public abstract class Level implements LevelModel {
             return new AutoValue_Level(Id, name, numRows, numCols, isLocked);
         }
     });
+
+    public static final class Marshal extends LevelMarshal<Marshal> {
+    }
 }
 
