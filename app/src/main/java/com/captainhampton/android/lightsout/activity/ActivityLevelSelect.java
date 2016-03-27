@@ -3,17 +3,14 @@ package com.captainhampton.android.lightsout.activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.captainhampton.android.lightsout.R;
 import com.captainhampton.android.lightsout.fragment.FragmentLevelSelect;
 import com.captainhampton.android.lightsout.fragment.FragmentMenu;
-import com.captainhampton.android.lightsout.solver.Levels;
 
 public class ActivityLevelSelect extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener {
 
@@ -29,12 +26,13 @@ public class ActivityLevelSelect extends AppCompatActivity implements FragmentMe
             String tag;
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            for (Pair<Integer, Integer> pair : Levels.levelList) {
+            // testing the single fragment with sqldelight add this back
+//            for (Pair<Integer, Integer> pair : Levels.levelList) {
 
-                FragmentLevelSelect fragmentLevelSelect = FragmentLevelSelect.newInstance(pair.first, pair.second);
-                tag = FragmentLevelSelect.TAG + "_" + Integer.toString(pair.first) + "_" + Integer.toString(pair.second);
+            FragmentLevelSelect fragmentLevelSelect = FragmentLevelSelect.newInstance(3, 3);
+            tag = FragmentLevelSelect.TAG + "_" + Integer.toString(3) + "_" + Integer.toString(3);
                 fragmentTransaction.add(R.id.level_select_linearlayout, fragmentLevelSelect, tag);
-            }
+//            }
             fragmentTransaction.commit();
         }
 

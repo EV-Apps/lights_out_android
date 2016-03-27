@@ -1,6 +1,5 @@
 package com.captainhampton.android.lightsout.adapter;
 
-
 import android.content.Context;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
@@ -10,25 +9,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.captainhampton.android.lightsout.R;
+import com.captainhampton.android.lightsout.model.Stage;
 
 import java.util.ArrayList;
 
-public class HorizontalImageAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
+public class HorizontalImageAdapter1 extends RecyclerView.Adapter<RecyclerViewHolder> {
 
 
     Context context;
-    ArrayList<ArrayList<Pair<Integer, Integer>>> stagesList;
+    ArrayList<Stage> stagesList;
     int layoutOfImageView = 0;
     int imageViewResourceId = 0;
     int x, y;
 
-    public HorizontalImageAdapter(Context context, ArrayList<ArrayList<Pair<Integer, Integer>>> stages, Pair<Integer, Integer> xy) {
-
+    public HorizontalImageAdapter1(Context context, ArrayList<Stage> result, Pair<Integer, Integer> xy) {
         this.context = context;
-        stagesList = stages;
+        stagesList = result;
         x = xy.first;
         y = xy.second;
-//        Paper.book().read(ActivityStartScreen.database);
+
     }
 
     @Override
@@ -54,10 +53,10 @@ public class HorizontalImageAdapter extends RecyclerView.Adapter<RecyclerViewHol
     }
 }
 
-class RecyclerViewHolder extends RecyclerView.ViewHolder {
+class RecyclerViewHolder1 extends RecyclerView.ViewHolder {
     public ImageView imageview;
 
-    public RecyclerViewHolder(View view) {
+    public RecyclerViewHolder1(View view) {
         super(view);
         this.imageview = (ImageView) view.findViewById(R.id.imageview_level);
     }
