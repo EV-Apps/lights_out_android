@@ -13,6 +13,8 @@ public abstract class Stage implements StageModel {
         }
     });
 
+
+    // not sure why this is needed but it is used ith the LightsOutOpenHelper.java
     public static final class Marshal extends StageMarshal<Marshal> {
     }
 
