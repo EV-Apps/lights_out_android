@@ -1,10 +1,9 @@
 package com.captainhampton.android.lightsout.solver;
 
 
-import android.support.v4.util.Pair;
+import android.util.Pair;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class Levels {
@@ -87,7 +86,8 @@ public class Levels {
         levelList.add(new Pair<>(4, 4));
         levelList.add(new Pair<>(5, 5));
         levelList.add(new Pair<>(6, 6));
-        levelList.add(new Pair<>(3, 3)); // hack to get the first element to be 3x3 by placing in the last slot
+        levelList.add(new Pair<>(3, 3));
+        // hack to get the first element to be 3x3 by placing in the last slot
 //        Collections.sort(levelList, new PairComparator());
         // see attempt to commit each fragment one by one in ActivityLevelSelect
     }
@@ -125,7 +125,7 @@ public class Levels {
         ArrayList<ArrayList<Pair<Integer, Integer>>> level = new ArrayList<>(levels.length);
         ArrayList<Pair<Integer, Integer>> stage = new ArrayList<>(avgNumbersOfLightsPerStage);
 
-        for (int a = 0; a < levels.length - 1; ++a) {
+        for (int a = 0; a < levels.length; ++a) {
             for (int b = 0; b < levels[a].length - 1; ++b) {
                 stage.add(new Pair<>(levels[a][b][0], levels[a][b][1]));
             }

@@ -4,9 +4,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,17 +29,20 @@ public class FragmentLevelSelect extends Fragment {
 
     private static final String X = "param1";
     private static final String Y = "param2";
-    private int x;
-    private int y;
+    private static final String LEVEL_ID = "levelId";
+    private int x, y;
+    private long levelId;
+
 
     public FragmentLevelSelect() {
     }
 
-    public static FragmentLevelSelect newInstance(int inX, int inY) {
+    public static FragmentLevelSelect newInstance(int inX, int inY, long levelId) {
         FragmentLevelSelect fragment = new FragmentLevelSelect();
         Bundle args = new Bundle();
         args.putInt(X, inX);
         args.putInt(Y, inY);
+        args.putLong(LEVEL_ID, levelId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,6 +54,7 @@ public class FragmentLevelSelect extends Fragment {
         if (getArguments() != null) {
             x = getArguments().getInt(X);
             y = getArguments().getInt(Y);
+            levelId = getArguments().getLong(LEVEL_ID);
         }
     }
 
@@ -80,10 +84,13 @@ public class FragmentLevelSelect extends Fragment {
     public void setAdapterWithDatabaseCall(RecyclerView recylerView) {
         SQLiteDatabase db = LightsOutOpenHelper.getInstance(getActivity()).getReadableDatabase();
         ArrayList<Stage> result = new ArrayList<>();
-        Cursor cursor = db.rawQuery(StageModel.SELECT_ALL, new String[0]);
+
+        // need to get the level id
+        Cursor cursor = db.rawQuery(StageModel.FOR_LEVEL, new String[]{String.valueOf(levelId)});
+
         while (cursor.moveToNext()) {
             result.add(Stage.MAPPER.map(cursor));
         }
-        recylerView.setAdapter(new HorizontalImageAdapter1(getActivity(), result, new Pair<>(3, 3)));
+        recylerView.setAdapter(new HorizontalImageAdapter1(getActivity(), result, new Pair<>(x, y)));
     }
 }

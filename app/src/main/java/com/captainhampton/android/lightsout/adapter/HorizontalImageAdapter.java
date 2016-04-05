@@ -2,8 +2,8 @@ package com.captainhampton.android.lightsout.adapter;
 
 
 import android.content.Context;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

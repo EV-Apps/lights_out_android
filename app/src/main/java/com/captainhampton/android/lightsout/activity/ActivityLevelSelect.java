@@ -1,5 +1,7 @@
 package com.captainhampton.android.lightsout.activity;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +13,11 @@ import android.view.View;
 import com.captainhampton.android.lightsout.R;
 import com.captainhampton.android.lightsout.fragment.FragmentLevelSelect;
 import com.captainhampton.android.lightsout.fragment.FragmentMenu;
+import com.captainhampton.android.lightsout.model.Level;
+import com.captainhampton.android.lightsout.model.LevelModel;
+import com.captainhampton.android.lightsout.model.LightsOutOpenHelper;
+
+import java.util.ArrayList;
 
 public class ActivityLevelSelect extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener {
 
@@ -26,13 +33,23 @@ public class ActivityLevelSelect extends AppCompatActivity implements FragmentMe
             String tag;
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            // testing the single fragment with sqldelight add this back
-//            for (Pair<Integer, Integer> pair : Levels.levelList) {
 
-            FragmentLevelSelect fragmentLevelSelect = FragmentLevelSelect.newInstance(3, 3);
-            tag = FragmentLevelSelect.TAG + "_" + Integer.toString(3) + "_" + Integer.toString(3);
+            SQLiteDatabase db = LightsOutOpenHelper.getInstance(this).getReadableDatabase();
+            ArrayList<Level> levelsList = new ArrayList<>();
+
+            // need to get the level id
+            Cursor cursor = db.rawQuery(LevelModel.SELECT_ALL, new String[0]);
+
+            while (cursor.moveToNext()) {
+                levelsList.add(Level.MAPPER.map(cursor));
+            }
+            // should pass in the db, and keep the calls to a minimum
+            for (Level l : levelsList) {
+
+                FragmentLevelSelect fragmentLevelSelect = FragmentLevelSelect.newInstance(l.num_rows(), l.num_cols(), l._id());
+                tag = FragmentLevelSelect.TAG + "_" + Integer.toString(l.num_rows()) + "_" + Integer.toString(l.num_cols());
                 fragmentTransaction.add(R.id.level_select_linearlayout, fragmentLevelSelect, tag);
-//            }
+            }
             fragmentTransaction.commit();
         }
 

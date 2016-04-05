@@ -15,6 +15,14 @@ public class StartGrid {
 
 
     public ArrayList<Pair<Integer, Integer>> startGrid = new ArrayList<>();
+
+    public StartGrid() {
+    }
+
+    // this constructor is used to if the format is already in arraylist pair
+    private StartGrid(ArrayList<Pair<Integer, Integer>> startingGrid) {
+        startGrid = startingGrid;
+    }
     // Integer[] does not work, will try raw type
     // testing if Integer[] will work without a converter(note int[] does not work, must be a type for generics)
     // may need a converter for the Pair data structure
@@ -50,4 +58,13 @@ public class StartGrid {
         return jsonString;
     }
 
+    public static StartGrid createWithGrid(ArrayList<Pair<Integer, Integer>> listGrid) {
+        return new StartGrid(listGrid);
+    }
+
+    public static String createSerializedWithGrid(ArrayList<Pair<Integer, Integer>> listGrid) throws IOException {
+        StartGrid sg = new StartGrid(listGrid);
+        String jsonString = StartGrid.serializeStartGridToJsonString(sg);
+        return jsonString;
+    }
 }
