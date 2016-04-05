@@ -13,13 +13,11 @@ import com.captainhampton.android.lightsout.model.Stage;
 
 import java.util.ArrayList;
 
-public class HorizontalImageAdapter1 extends RecyclerView.Adapter<RecyclerViewHolder> {
+public class HorizontalImageAdapter1 extends RecyclerView.Adapter<RecyclerViewHolder1> {
 
 
     Context context;
     ArrayList<Stage> stagesList;
-    int layoutOfImageView = 0;
-    int imageViewResourceId = 0;
     int x, y;
 
     public HorizontalImageAdapter1(Context context, ArrayList<Stage> result, Pair<Integer, Integer> xy) {
@@ -31,19 +29,23 @@ public class HorizontalImageAdapter1 extends RecyclerView.Adapter<RecyclerViewHo
     }
 
     @Override
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewHolder1 onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         View view = inflater.inflate(R.layout.simple_imageview, parent, false);
-        return new RecyclerViewHolder(view);
+        return new RecyclerViewHolder1(view);
 
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-//        final ImageView imageView = stagesList.get(position);
+    public void onBindViewHolder(RecyclerViewHolder1 holder, int position) {
+        boolean isLocked = stagesList.get(position).is_locked();
 
-        holder.imageview.setImageResource(android.R.drawable.star_big_on);
+        if (isLocked) {
+            holder.imageview.setImageResource(android.R.drawable.ic_lock_lock);
+        } else {
+            holder.imageview.setImageResource(android.R.drawable.star_big_on);
+        }
     }
 
     @Override

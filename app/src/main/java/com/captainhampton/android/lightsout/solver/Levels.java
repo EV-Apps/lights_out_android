@@ -129,7 +129,8 @@ public class Levels {
             for (int b = 0; b < levels[a].length - 1; ++b) {
                 stage.add(new Pair<>(levels[a][b][0], levels[a][b][1]));
             }
-            level.add(stage);
+            level.add(new ArrayList<>(stage));
+            stage.clear();
         }
         return level;
     }

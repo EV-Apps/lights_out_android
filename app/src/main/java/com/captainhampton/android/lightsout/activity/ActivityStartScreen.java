@@ -27,7 +27,7 @@ public class ActivityStartScreen extends AppCompatActivity {
 
     private void initialization() {
 
-        paperInit();
+        //    paperInit();
 
         setContentView(R.layout.activity_start_screen);
         findViewById(R.id.fullscreen_content_controls).setVisibility(View.VISIBLE);
