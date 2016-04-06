@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout.activity;
+package com.evapps.lightsout.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,10 +11,10 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.captainhampton.android.lightsout.R;
-import com.captainhampton.android.lightsout.fragment.FragmentLevelSelect;
-import com.captainhampton.android.lightsout.model.StartGrid;
-import com.captainhampton.android.lightsout.solver.Solver;
+import com.evapps.lightsout.R;
+import com.evapps.lightsout.fragment.FragmentLevelSelect;
+import com.evapps.lightsout.model.StartGrid;
+import com.evapps.lightsout.solver.Solver;
 
 import java.io.IOException;
 

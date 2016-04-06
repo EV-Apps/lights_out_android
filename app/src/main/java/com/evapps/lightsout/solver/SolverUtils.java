@@ -1,6 +1,7 @@
-package com.captainhampton.android.lightsout.solver;
+package com.evapps.lightsout.solver;
 
-import com.captainhampton.android.lightsout.activity.ActivityGameboard;
+
+import com.evapps.lightsout.activity.ActivityGameboard;
 
 import org.ejml.simple.SimpleMatrix;
 

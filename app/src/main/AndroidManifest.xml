@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.captainhampton.android.lightsout">
+    package="com.evapps.lightsout">
 
     <application
         android:allowBackup="true"
@@ -21,7 +21,7 @@
         <activity
             android:name=".activity.ActivityStartScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_start_screen"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +36,7 @@
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.captainhampton.android.lightsout.activity.ActivityMain" />
+                android:value="com.evapps.lightsout.activity.ActivityMain" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,7 +51,7 @@
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.captainhampton.android.lightsout.activity.ActivityLevelSelect" />
+                android:value="com.evapps.lightsout.activity.ActivityLevelSelect" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

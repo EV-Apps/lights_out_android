@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout.activity;
+package com.evapps.lightsout.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +10,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.captainhampton.android.lightsout.R;
-import com.captainhampton.android.lightsout.fragment.FragmentClassic;
-import com.captainhampton.android.lightsout.fragment.FragmentMenu;
+import com.evapps.lightsout.R;
+import com.evapps.lightsout.fragment.FragmentClassic;
+import com.evapps.lightsout.fragment.FragmentMenu;
 
 public class ActivityMain extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener,
         FragmentClassic.OnFragmentInteractionListener {

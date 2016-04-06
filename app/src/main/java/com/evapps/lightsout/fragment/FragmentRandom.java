@@ -1,4 +1,4 @@
-//package com.captainhampton.android.lightsout.fragment;
+//package com.evapps.lightsout.fragment;
 //
 //import android.content.Context;
 //import android.graphics.Color;

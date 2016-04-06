@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout.solver;
+package com.evapps.lightsout.solver;
 
 
 import android.util.Pair;

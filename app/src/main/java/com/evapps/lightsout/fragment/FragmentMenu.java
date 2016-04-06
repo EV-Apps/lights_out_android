@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout.fragment;
+package com.evapps.lightsout.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.captainhampton.android.lightsout.LOUtils;
-import com.captainhampton.android.lightsout.R;
+import com.evapps.lightsout.LOUtils;
+import com.evapps.lightsout.R;
 
 public class FragmentMenu extends Fragment implements OnClickListener {
 
@@ -113,7 +113,7 @@ public class FragmentMenu extends Fragment implements OnClickListener {
             }
 //
         } else if (btnAbout.isPressed()) {
-            
+
             new MaterialDialog.Builder(getContext())
                     .title(R.string.about_title)
                     .content(R.string.about_content)

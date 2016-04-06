@@ -1,9 +1,9 @@
-package com.captainhampton.android.lightsout.model;
+package com.evapps.lightsout.model;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Pair;
 
-import com.captainhampton.android.lightsout.solver.Levels;
+import com.evapps.lightsout.solver.Levels;
 
 import java.io.IOException;
 import java.util.ArrayList;

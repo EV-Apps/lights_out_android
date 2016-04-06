@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout.fragment;
+package com.evapps.lightsout.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,12 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.captainhampton.android.lightsout.R;
-import com.captainhampton.android.lightsout.activity.ActivityGameboard;
-import com.captainhampton.android.lightsout.adapter.HorizontalImageAdapter1;
-import com.captainhampton.android.lightsout.model.LightsOutOpenHelper;
-import com.captainhampton.android.lightsout.model.Stage;
-import com.captainhampton.android.lightsout.model.StageModel;
+import com.evapps.lightsout.R;
+import com.evapps.lightsout.activity.ActivityGameboard;
+import com.evapps.lightsout.adapter.HorizontalImageAdapter1;
+import com.evapps.lightsout.model.LightsOutOpenHelper;
+import com.evapps.lightsout.model.Stage;
+import com.evapps.lightsout.model.StageModel;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout.activity;
+package com.evapps.lightsout.activity;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,12 +7,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.captainhampton.android.lightsout.R;
-import com.captainhampton.android.lightsout.fragment.FragmentLevelSelect;
-import com.captainhampton.android.lightsout.fragment.FragmentMenu;
-import com.captainhampton.android.lightsout.model.Level;
-import com.captainhampton.android.lightsout.model.LevelModel;
-import com.captainhampton.android.lightsout.model.LightsOutOpenHelper;
+import com.evapps.lightsout.R;
+import com.evapps.lightsout.fragment.FragmentLevelSelect;
+import com.evapps.lightsout.fragment.FragmentMenu;
+import com.evapps.lightsout.model.Level;
+import com.evapps.lightsout.model.LevelModel;
+import com.evapps.lightsout.model.LightsOutOpenHelper;
 
 import java.util.ArrayList;
 

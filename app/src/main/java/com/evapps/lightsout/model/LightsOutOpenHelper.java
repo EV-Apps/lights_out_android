@@ -1,10 +1,11 @@
-package com.captainhampton.android.lightsout.model;
+package com.evapps.lightsout.model;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.captainhampton.android.lightsout.solver.Levels;
+import com.evapps.lightsout.solver.Levels;
+
 
 public final class LightsOutOpenHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
