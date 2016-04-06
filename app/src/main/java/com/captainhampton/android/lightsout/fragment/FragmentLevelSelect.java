@@ -1,5 +1,7 @@
 package com.captainhampton.android.lightsout.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,18 +15,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.captainhampton.android.lightsout.R;
-import com.captainhampton.android.lightsout.adapter.HorizontalImageAdapter;
+import com.captainhampton.android.lightsout.activity.ActivityGameboard;
 import com.captainhampton.android.lightsout.adapter.HorizontalImageAdapter1;
 import com.captainhampton.android.lightsout.model.LightsOutOpenHelper;
 import com.captainhampton.android.lightsout.model.Stage;
 import com.captainhampton.android.lightsout.model.StageModel;
-import com.captainhampton.android.lightsout.solver.Levels;
 
 import java.util.ArrayList;
 
-public class FragmentLevelSelect extends Fragment {
+public class FragmentLevelSelect extends Fragment implements HorizontalImageAdapter1.OnClickListener {
 
     public static final String TAG = "FragmentLevelSelect";
+    public static final int REQUEST_CODE = 0;
 
 
     private static final String X = "param1";
@@ -32,7 +34,6 @@ public class FragmentLevelSelect extends Fragment {
     private static final String LEVEL_ID = "levelId";
     private int x, y;
     private long levelId;
-
 
     public FragmentLevelSelect() {
     }
@@ -76,10 +77,10 @@ public class FragmentLevelSelect extends Fragment {
         return rootView;
     }
 
-    private void setAdapterWithTransformedLevelList(RecyclerView recyclerView) {
-        ArrayList<ArrayList<Pair<Integer, Integer>>> levelWithStages = Levels.transformLevelToList(x, y);
-        recyclerView.setAdapter(new HorizontalImageAdapter(getActivity(), levelWithStages, new Pair<>(x, y)));
-    }
+//    private void setAdapterWithTransformedLevelList(RecyclerView recyclerView) {
+//        ArrayList<ArrayList<Pair<Integer, Integer>>> levelWithStages = Levels.transformLevelToList(x, y);
+//        recyclerView.setAdapter(new HorizontalImageAdapter(getActivity(), levelWithStages, new Pair<>(x, y)));
+//    }
 
     public void setAdapterWithDatabaseCall(RecyclerView recylerView) {
         SQLiteDatabase db = LightsOutOpenHelper.getInstance(getActivity()).getReadableDatabase();
@@ -91,6 +92,34 @@ public class FragmentLevelSelect extends Fragment {
         while (cursor.moveToNext()) {
             result.add(Stage.MAPPER.map(cursor));
         }
-        recylerView.setAdapter(new HorizontalImageAdapter1(getActivity(), result, new Pair<>(x, y)));
+
+
+        // pass in cursor to adapter
+        recylerView.setAdapter(new HorizontalImageAdapter1(getActivity(), result, new Pair<>(x, y), this));
+    }
+
+    @Override
+    public void onStageClick(Stage stage) {
+        Intent intent = new Intent(this.getActivity(), ActivityGameboard.class);
+        intent.putExtra(ActivityGameboard.STAGE, stage.start_grid());
+        intent.putExtra(ActivityGameboard.ROW, stage.num_rows());
+        intent.putExtra(ActivityGameboard.COL, stage.num_cols());
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                // update database to show the level was complete
+//                SQLiteDatabase db = LightsOutOpenHelper.getInstance(getActivity()).getReadableDatabase();
+//                Cursor cursor = db.rawQuery(StageModel.FOR_LEVEL, new String[]{String.valueOf(levelId)});
+//
+            } else {
+                // the backed out
+            }
+        }
+
     }
 }

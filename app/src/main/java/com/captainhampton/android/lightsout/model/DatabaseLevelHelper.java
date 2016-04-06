@@ -53,7 +53,7 @@ public class DatabaseLevelHelper {
         db.insert(Stage.TABLE_NAME, null, new Stage.Marshal()
                 .num_cols(cols)
                 .num_rows(rows)
-                .is_locked(true)
+//                .is_locked(true) // should default to is_locked BOOLEAN NOT NULL DEFAULT 1
                 .level(level)
                 .start_grid(jsonStartGridSerialized)
                 .asContentValues());

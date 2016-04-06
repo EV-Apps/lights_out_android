@@ -32,7 +32,7 @@ public final class ArrayListPairAdapter {
         char[] chars = jsonIn.toCharArray();
         ArrayList<Pair<Integer, Integer>> alp = new ArrayList<>();
         for (int i = 0; chars[i] != ';'; i += 2) {
-            alp.add(new Pair<Integer, Integer>(Integer.valueOf(chars[i]), Integer.valueOf(chars[i + 1])));
+            alp.add(new Pair<Integer, Integer>(Character.getNumericValue(chars[i]), Character.getNumericValue(chars[i + 1])));
         }
         return alp;
     }

@@ -37,6 +37,22 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.captainhampton.android.lightsout.activity.ActivityMain" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.ActivityGameboard"
+            android:label="@string/title_activity_gameboard"
+            android:parentActivityName=".activity.ActivityLevelSelect"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.captainhampton.android.lightsout.activity.ActivityLevelSelect" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

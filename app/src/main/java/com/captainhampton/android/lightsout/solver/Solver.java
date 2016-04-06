@@ -1,17 +1,19 @@
 package com.captainhampton.android.lightsout.solver;
 
-import com.captainhampton.android.lightsout.fragment.FragmentRandom;
+import com.captainhampton.android.lightsout.activity.ActivityGameboard;
 
 import org.ejml.simple.SimpleMatrix;
 
 public class Solver {
 
+    ActivityGameboard random;
     int NUM_ROWS, NUM_COLS;
-    public Solver(int numRows, int numCols){
+
+    public Solver(int numRows, int numCols, ActivityGameboard ag) {
+        random = ag;
         NUM_COLS = numCols;
         NUM_ROWS = numRows;
     }
-    FragmentRandom random = new FragmentRandom();
 
     public static int findFirstIdx(SimpleMatrix C) {
         int idx = -1;
@@ -27,21 +29,21 @@ public class Solver {
     }
 
     public static SimpleMatrix getRow(SimpleMatrix M, int row_num, int col_offset) {
-        SimpleMatrix row = M.extractMatrix(row_num,row_num+1,col_offset,M.numCols());
+        SimpleMatrix row = M.extractMatrix(row_num, row_num + 1, col_offset, M.numCols());
         return row;
     }
 
     public static SimpleMatrix getCol(SimpleMatrix M, int col_num, int row_offset) {
-        SimpleMatrix col = M.extractMatrix(row_offset,M.numRows(),col_num,col_num+1);
+        SimpleMatrix col = M.extractMatrix(row_offset, M.numRows(), col_num, col_num + 1);
         return col;
     }
 
     public static SimpleMatrix setRow(SimpleMatrix M, SimpleMatrix row, int row_num, int from, int to) {
 
         double val;
-        for (int j = from; j < to; j++ ) {
-            val = row.get(0,j);
-            M.set(row_num,j,val);
+        for (int j = from; j < to; j++) {
+            val = row.get(0, j);
+            M.set(row_num, j, val);
         }
 
         return M;
@@ -53,11 +55,11 @@ public class Solver {
 
         for (int i = 0; i < M.numRows(); i++) {
             for (int j = 0; j < M.numCols(); j++) {
-                double a = M.get(i,j);
+                double a = M.get(i, j);
                 double b = flip.get(i, j);
                 double c = Double.longBitsToDouble(
                         Double.doubleToRawLongBits(a) ^ Double.doubleToRawLongBits(b));
-                P.set(i,j,c);
+                P.set(i, j, c);
             }
         }
         return P;
@@ -68,44 +70,44 @@ public class Solver {
         int i = 0;
         int j = 0;
 
-        while ( (i < A.numRows()) && (j < A.numCols()) ) {
-            SimpleMatrix C = A.extractMatrix(i,A.numRows(),j,j+1);
+        while ((i < A.numRows()) && (j < A.numCols())) {
+            SimpleMatrix C = A.extractMatrix(i, A.numRows(), j, j + 1);
 
             // Find value and index of largest element in the remainder of column j.
             int k = findFirstIdx(C) + i;
 
             // Swap i-th and k-th rows.
             if (k >= 0) {
-                SimpleMatrix row_i = getRow(A,i,0);
-                SimpleMatrix row_k = getRow(A,k,0);
+                SimpleMatrix row_i = getRow(A, i, 0);
+                SimpleMatrix row_k = getRow(A, k, 0);
 
-                A = setRow(A,row_i,k,0,row_i.numCols());
-                A = setRow(A,row_k,i,0,row_k.numCols());
+                A = setRow(A, row_i, k, 0, row_i.numCols());
+                A = setRow(A, row_k, i, 0, row_k.numCols());
 
             }
 
             // Save the right hand side of the pivot row
-            SimpleMatrix aijn = getRow(A,i,j);
+            SimpleMatrix aijn = getRow(A, i, j);
 
             // Column we're looking at
-            SimpleMatrix col = getCol(A,j,0);
+            SimpleMatrix col = getCol(A, j, 0);
 
             // Never XOR the pivot row against itself
-            col.set(i,0);
+            col.set(i, 0);
 
             // This builds an matrix of bits to flip
             SimpleMatrix flip = col.mult(aijn);
 
             // XOR the right hand side of the pivot row with all the other rows
-            SimpleMatrix A_sub = A.extractMatrix(0,A.numRows(),j,A.numCols());
+            SimpleMatrix A_sub = A.extractMatrix(0, A.numRows(), j, A.numCols());
 
-            SimpleMatrix A_sub_xor = logicalSymmetricDifference(A_sub,flip);
+            SimpleMatrix A_sub_xor = logicalSymmetricDifference(A_sub, flip);
 
             for (int n = 0; n < A.numRows(); n++) {
                 int col_count = 0;
                 for (int m = j; m < A.numCols(); m++) {
-                    double xor_val = A_sub_xor.get(n,col_count);
-                    A.set(n,m,xor_val);
+                    double xor_val = A_sub_xor.get(n, col_count);
+                    A.set(n, m, xor_val);
                     col_count++;
                 }
             }
@@ -146,7 +148,7 @@ public class Solver {
         boolean[][] solution = new boolean[NUM_ROWS][NUM_COLS];
 
 
-        SimpleMatrix A = SolverUtils.getAdjacencyMatrix(NUM_ROWS, NUM_COLS);
+        SimpleMatrix A = SolverUtils.getAdjacencyMatrix(NUM_ROWS, NUM_COLS, random);
         SimpleMatrix b;
         b = calculateLightVector(light_states);
         A = A.combine(0, A.numCols(), b.transpose());
@@ -157,7 +159,7 @@ public class Solver {
         int x_size = 0;
         for (int i = 0; i < NUM_ROWS; i++) {
             for (int j = 0; j < NUM_COLS; j++) {
-                if ( x.get(x_size) == 1.0 )
+                if (x.get(x_size) == 1.0)
                     solution[i][j] = Boolean.TRUE;
                 else
                     solution[i][j] = Boolean.FALSE;
@@ -169,15 +171,15 @@ public class Solver {
     }
 
     public SimpleMatrix calculateLightVector(boolean[][] light_states) {
-        SimpleMatrix vec = new SimpleMatrix(1,NUM_ROWS*NUM_COLS);
+        SimpleMatrix vec = new SimpleMatrix(1, NUM_ROWS * NUM_COLS);
 
         int vec_size = 0;
         for (int i = 0; i < NUM_ROWS; i++) {
             for (int j = 0; j < NUM_COLS; j++) {
                 if (light_states[i][j] == Boolean.TRUE)
-                    vec.set(0,vec_size,1);
+                    vec.set(0, vec_size, 1);
                 else
-                    vec.set(0, vec_size,0);
+                    vec.set(0, vec_size, 0);
 
                 vec_size++;
             }
@@ -196,16 +198,16 @@ public class Solver {
 
         adj_pos_vec[x * NUM_ROWS + y] = 1;
 
-        if ( !random.isLightOutOfBounds(top, y) )
+        if (!random.isLightOutOfBounds(top, y))
             adj_pos_vec[top * NUM_ROWS + y] = 1;
 
-        if ( !random.isLightOutOfBounds(bot, y) )
+        if (!random.isLightOutOfBounds(bot, y))
             adj_pos_vec[bot * NUM_ROWS + y] = 1;
 
-        if ( !random.isLightOutOfBounds(x, left) )
+        if (!random.isLightOutOfBounds(x, left))
             adj_pos_vec[x * NUM_ROWS + left] = 1;
 
-        if ( !random.isLightOutOfBounds(x, right) )
+        if (!random.isLightOutOfBounds(x, right))
             adj_pos_vec[x * NUM_ROWS + right] = 1;
 
         return adj_pos_vec;

@@ -1,10 +1,12 @@
 package com.captainhampton.android.lightsout.model;
 
 
+import android.os.Parcelable;
+
 import com.google.auto.value.AutoValue;
 
 @AutoValue
-public abstract class Stage implements StageModel {
+public abstract class Stage implements StageModel, Parcelable {
 
     public static final Mapper<Stage> MAPPER = new Mapper<>(new Mapper.Creator<Stage>() {
         @Override
