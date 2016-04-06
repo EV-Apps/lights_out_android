@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout.activity;
+package com.evapps.lightsout.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.captainhampton.android.lightsout.LOUtils;
-import com.captainhampton.android.lightsout.R;
-import com.captainhampton.android.lightsout.solver.Levels;
+import com.evapps.lightsout.LOUtils;
+import com.evapps.lightsout.R;
+import com.evapps.lightsout.solver.Levels;
 
 import java.util.ArrayList;
 
@@ -56,12 +56,12 @@ public class ActivityStartScreen extends AppCompatActivity {
         if (!book.exist(database)) {
             ArrayList<ArrayList<Boolean>> stages = new ArrayList<>();
 
-            stages.add(Levels.getStagesListOfIsLocked(3,3));
-            stages.add(Levels.getStagesListOfIsLocked(3,4));
-            stages.add(Levels.getStagesListOfIsLocked(4,3));
-            stages.add(Levels.getStagesListOfIsLocked(4,4));
-            stages.add(Levels.getStagesListOfIsLocked(5,5));
-            stages.add(Levels.getStagesListOfIsLocked(6,6));
+            stages.add(Levels.getStagesListOfIsLocked(3, 3));
+            stages.add(Levels.getStagesListOfIsLocked(3, 4));
+            stages.add(Levels.getStagesListOfIsLocked(4, 3));
+            stages.add(Levels.getStagesListOfIsLocked(4, 4));
+            stages.add(Levels.getStagesListOfIsLocked(5, 5));
+            stages.add(Levels.getStagesListOfIsLocked(6, 6));
 
             Paper.book().write(database, stages); //
         }

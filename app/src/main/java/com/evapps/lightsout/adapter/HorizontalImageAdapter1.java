@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout.adapter;
+package com.evapps.lightsout.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.captainhampton.android.lightsout.R;
-import com.captainhampton.android.lightsout.model.Stage;
+import com.evapps.lightsout.R;
+import com.evapps.lightsout.model.Stage;
 
 import java.util.ArrayList;
 

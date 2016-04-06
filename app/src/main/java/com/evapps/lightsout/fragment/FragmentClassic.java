@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout.fragment;
+package com.evapps.lightsout.fragment;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,20 +12,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.captainhampton.android.lightsout.R;
-import com.captainhampton.android.lightsout.solver.Levels;
-import com.captainhampton.android.lightsout.solver.Solver;
+import com.evapps.lightsout.R;
+import com.evapps.lightsout.solver.Levels;
+import com.evapps.lightsout.solver.Solver;
 
 
 public class FragmentClassic extends Fragment implements OnClickListener {
 
     public static final String TAG = "FragmentClassic";
     private static final int[][] LIGHT_IDS = {
-            { R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4 },
-            { R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9 },
-            { R.id.button10, R.id.button11, R.id.button12, R.id.button13, R.id.button14 },
-            { R.id.button15, R.id.button16, R.id.button17, R.id.button18, R.id.button19 },
-            { R.id.button20, R.id.button21, R.id.button22, R.id.button23, R.id.button24 },
+            {R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4},
+            {R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9},
+            {R.id.button10, R.id.button11, R.id.button12, R.id.button13, R.id.button14},
+            {R.id.button15, R.id.button16, R.id.button17, R.id.button18, R.id.button19},
+            {R.id.button20, R.id.button21, R.id.button22, R.id.button23, R.id.button24},
     };
     private static final int NUM_ROWS = 5;
     private static final int NUM_COLS = 5;
@@ -93,17 +93,17 @@ public class FragmentClassic extends Fragment implements OnClickListener {
 
     private void flipLight(int x, int y) {
         if (isLightActive(x, y))
-            deactivateButton(x,y);
+            deactivateButton(x, y);
         else
             activateButton(x, y);
     }
 
     public boolean isLightOutOfBounds(int x, int y) {
-        return ( x >= NUM_ROWS || x < 0 || y >= NUM_COLS || y < 0 );
+        return (x >= NUM_ROWS || x < 0 || y >= NUM_COLS || y < 0);
     }
 
     private boolean isLightActive(int x, int y) {
-        return ( light_states[x][y] == Boolean.TRUE );
+        return (light_states[x][y] == Boolean.TRUE);
     }
 
     private void pressedLights(int x, int y) {
@@ -112,7 +112,7 @@ public class FragmentClassic extends Fragment implements OnClickListener {
         int left = y - 1;
         int right = y + 1;
 
-        flipLight(x,y);
+        flipLight(x, y);
 
         if (!isLightOutOfBounds(top, y))
             flipLight(top, y);
@@ -147,9 +147,9 @@ public class FragmentClassic extends Fragment implements OnClickListener {
         clearSolution();
 
 
-        for (int i = 0; i < Levels.getLevels(NUM_ROWS,NUM_COLS)[level_num].length; i++) {
-            int x = Levels.getLevels(NUM_ROWS,NUM_COLS)[level_num][i][0];
-            int y = Levels.getLevels(NUM_ROWS,NUM_COLS)[level_num][i][1];
+        for (int i = 0; i < Levels.getLevels(NUM_ROWS, NUM_COLS)[level_num].length; i++) {
+            int x = Levels.getLevels(NUM_ROWS, NUM_COLS)[level_num][i][0];
+            int y = Levels.getLevels(NUM_ROWS, NUM_COLS)[level_num][i][1];
 
             activateButton(x, y);
         }
@@ -168,24 +168,24 @@ public class FragmentClassic extends Fragment implements OnClickListener {
 
     private void setupVariables(View view) {
 
-        bHome = (Button)view.findViewById(R.id.bHome);
+        bHome = (Button) view.findViewById(R.id.bHome);
         bHome.setOnClickListener(this);
 
-        bReset = (Button)view.findViewById(R.id.bReset);
+        bReset = (Button) view.findViewById(R.id.bReset);
         bReset.setOnClickListener(this);
 
-        bHint = (Button)view.findViewById(R.id.bHint);
+        bHint = (Button) view.findViewById(R.id.bHint);
         bHint.setOnClickListener(this);
 
-        tvNumMoves = (TextView)view.findViewById(R.id.tvNumMoves);
-        tvLevelTime = (TextView)view.findViewById(R.id.tvLevelTime);
+        tvNumMoves = (TextView) view.findViewById(R.id.tvNumMoves);
+        tvLevelTime = (TextView) view.findViewById(R.id.tvLevelTime);
 
         for (int i = 0; i < NUM_ROWS; i++) {
             for (int j = 0; j < NUM_COLS; j++) {
 
                 final int x = i;
                 final int y = j;
-                lights[x][y] = (Button)view.findViewById(LIGHT_IDS[x][y]);
+                lights[x][y] = (Button) view.findViewById(LIGHT_IDS[x][y]);
                 lights[x][y].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -198,10 +198,10 @@ public class FragmentClassic extends Fragment implements OnClickListener {
                             tvLevelTime.setText(String.format("%d", level_time));
                         }
 
-                        if ( checkVictory() ) {
+                        if (checkVictory()) {
                             // TODO : victory dance
                             level_num++;
-                            if (level_num <= Levels.getLevels(NUM_ROWS,NUM_COLS).length) {
+                            if (level_num <= Levels.getLevels(NUM_ROWS, NUM_COLS).length) {
                                 setLevel(level_num);
                                 setupBoard();
                             } else {

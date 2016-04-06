@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout;
+package com.evapps.lightsout;
 
 
 import android.app.Activity;

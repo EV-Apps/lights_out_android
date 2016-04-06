@@ -1,4 +1,4 @@
-package com.captainhampton.android.lightsout.model;
+package com.evapps.lightsout.model;
 
 
 import android.os.Parcelable;
