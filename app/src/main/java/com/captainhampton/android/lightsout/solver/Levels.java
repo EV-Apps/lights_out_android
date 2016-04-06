@@ -126,7 +126,7 @@ public class Levels {
         ArrayList<Pair<Integer, Integer>> stage = new ArrayList<>(avgNumbersOfLightsPerStage);
 
         for (int a = 0; a < levels.length; ++a) {
-            for (int b = 0; b < levels[a].length - 1; ++b) {
+            for (int b = 0; b < levels[a].length; ++b) {
                 stage.add(new Pair<>(levels[a][b][0], levels[a][b][1]));
             }
             level.add(new ArrayList<>(stage));

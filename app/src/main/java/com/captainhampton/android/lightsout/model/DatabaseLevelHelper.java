@@ -53,7 +53,7 @@ public class DatabaseLevelHelper {
         db.insert(Stage.TABLE_NAME, null, new Stage.Marshal()
                 .num_cols(cols)
                 .num_rows(rows)
-                .is_locked(isLocked)
+                .is_locked(true)
                 .level(level)
                 .start_grid(jsonStartGridSerialized)
                 .asContentValues());
