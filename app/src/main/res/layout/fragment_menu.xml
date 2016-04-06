@@ -11,6 +11,10 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
+    <com.pddstudio.starview.StarView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <TextView
         android:id="@+id/menu_screen_title"
         android:layout_width="0dp"
@@ -41,27 +45,27 @@
 
             <Button
                 android:id="@+id/button_play"
+                style="@style/AppTheme.ButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+
+
                 android:layout_weight="1"
-
-
-                android:text="@string/button_classic"
-                android:enabled="true"
                 android:background="@drawable/buttonshape"
-                style="@style/AppTheme.ButtonStyle" />
+                android:enabled="true"
+                android:text="@string/button_classic" />
 
             <Button
                 android:id="@+id/button_howtoplay"
+                style="@style/AppTheme.ButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+
+
                 android:layout_weight="1"
-
-
-                android:text="@string/button_how_to_play"
-                android:enabled="true"
                 android:background="@drawable/buttonshape"
-                style="@style/AppTheme.ButtonStyle" />
+                android:enabled="true"
+                android:text="@string/button_how_to_play" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,26 +77,26 @@
 
             <Button
                 android:id="@+id/button_todo"
+                style="@style/AppTheme.ButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+
+
                 android:layout_weight="1"
-
-
-                android:text="@string/button_deluxe"
-                android:enabled="true"
                 android:background="@drawable/buttonshape"
-                style="@style/AppTheme.ButtonStyle" />
+                android:enabled="true"
+                android:text="@string/button_deluxe" />
 
             <Button
                 android:id="@+id/button_about"
+                style="@style/AppTheme.ButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
 
-                android:text="@string/button_about"
-                android:enabled="true"
+                android:layout_weight="1"
                 android:background="@drawable/buttonshape"
-                style="@style/AppTheme.ButtonStyle" />
+                android:enabled="true"
+                android:text="@string/button_about" />
         </LinearLayout>
 
     </LinearLayout>

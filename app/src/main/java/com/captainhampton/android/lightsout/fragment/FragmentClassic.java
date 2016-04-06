@@ -60,7 +60,7 @@ public class FragmentClassic extends Fragment implements OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        solver = new Solver(NUM_ROWS, NUM_COLS);
+//        solver = new Solver(NUM_ROWS, NUM_COLS, this);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);

@@ -2,21 +2,16 @@ package com.captainhampton.android.lightsout.adapter;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.captainhampton.android.lightsout.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HorizontalImageAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
@@ -33,6 +28,7 @@ public class HorizontalImageAdapter extends RecyclerView.Adapter<RecyclerViewHol
         stagesList = stages;
         x = xy.first;
         y = xy.second;
+//        Paper.book().read(ActivityStartScreen.database);
     }
 
     @Override

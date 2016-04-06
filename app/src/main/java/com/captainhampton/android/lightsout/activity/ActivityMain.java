@@ -13,11 +13,9 @@ import android.view.MenuItem;
 import com.captainhampton.android.lightsout.R;
 import com.captainhampton.android.lightsout.fragment.FragmentClassic;
 import com.captainhampton.android.lightsout.fragment.FragmentMenu;
-import com.captainhampton.android.lightsout.fragment.FragmentRandom;
 
 public class ActivityMain extends AppCompatActivity implements FragmentMenu.OnFragmentInteractionListener,
-        FragmentClassic.OnFragmentInteractionListener,
-        FragmentRandom.OnFragmentInteractionListener {
+        FragmentClassic.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

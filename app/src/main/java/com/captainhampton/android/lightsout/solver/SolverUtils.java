@@ -1,19 +1,21 @@
 package com.captainhampton.android.lightsout.solver;
 
+import com.captainhampton.android.lightsout.activity.ActivityGameboard;
+
 import org.ejml.simple.SimpleMatrix;
 
 public class SolverUtils {
 
-    public static SimpleMatrix getAdjacencyMatrix(int numRows, int numCols) {
+    public static SimpleMatrix getAdjacencyMatrix(int numRows, int numCols, ActivityGameboard activityGameboard) {
 
-        SimpleMatrix M = new SimpleMatrix(numRows*numCols, numRows*numCols);
-        Solver solver = new Solver(numRows, numCols);
+        SimpleMatrix M = new SimpleMatrix(numRows * numCols, numRows * numCols);
+        Solver solver = new Solver(numRows, numCols, activityGameboard);
 
         int row_count = 0;
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
-                double[] vec = solver.getAdjacentPositions(i,j);
-                M.setRow(row_count,0,vec);
+                double[] vec = solver.getAdjacentPositions(i, j);
+                M.setRow(row_count, 0, vec);
                 row_count++;
             }
         }
