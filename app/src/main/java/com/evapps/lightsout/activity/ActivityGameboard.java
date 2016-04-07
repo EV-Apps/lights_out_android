@@ -1,5 +1,6 @@
 package com.evapps.lightsout.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.evapps.lightsout.R;
-import com.evapps.lightsout.fragment.FragmentLevelSelect;
 import com.evapps.lightsout.model.StartGrid;
 import com.evapps.lightsout.solver.Solver;
 
@@ -215,7 +215,12 @@ public class ActivityGameboard extends AppCompatActivity implements View.OnClick
                         }
 
                         if (checkVictory()) {
-                            finishActivity(FragmentLevelSelect.REQUEST_CODE); // will go back to the last stage
+                            // use this finish
+                            setResult(Activity.RESULT_OK);
+                            finish();//testing to see if this finish will close the activity
+
+                            // finishActivity did not work
+//                            finishActivity(FragmentLevelSelect.REQUEST_CODE); // will go back to the last stage
                             // go back to activity and check the stage as completed
                             // TODO : victory dance
 //                            level_num++; // cant increment levels anymore since the level data is received from the database and onclick
@@ -264,6 +269,11 @@ public class ActivityGameboard extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
+
+        if (bHome.isPressed()) {
+            setResult(Activity.RESULT_CANCELED);
+            finish();
+        }
 
         if (bReset.isPressed()) {
             setupBoard();

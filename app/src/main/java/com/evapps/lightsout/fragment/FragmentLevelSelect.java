@@ -112,6 +112,7 @@ public class FragmentLevelSelect extends Fragment implements HorizontalImageAdap
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
+                // this will be call after finish
                 // update database to show the level was complete
 //                SQLiteDatabase db = LightsOutOpenHelper.getInstance(getActivity()).getReadableDatabase();
 //                Cursor cursor = db.rawQuery(StageModel.FOR_LEVEL, new String[]{String.valueOf(levelId)});
